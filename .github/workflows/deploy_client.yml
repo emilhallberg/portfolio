@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-    # paths:
-    #   - "client/**"
+    paths:
+      - "client/**"
 env:
-  REGISTRY: "ghcr.io/emilhallberg"
+  IMAGE_REGISTRY: "ghcr.io/emilhallberg"
 
 jobs:
   deploy:
