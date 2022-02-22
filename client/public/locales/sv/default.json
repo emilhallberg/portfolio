@@ -1,0 +1,15 @@
+{
+  "dictionary": {
+    "read": "Läs mer"
+  },
+  "footer": {
+    "navigation": "Navigera",
+    "visit": "Besök",
+    "follow": "Följ mig",
+    "language": "Språk"
+  },
+  "empty": {
+    "title": "Hoppsan! Är du vilse?",
+    "text": "Jag föreslår att du beger dig hem."
+  }
+}

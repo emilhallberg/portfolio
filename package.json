@@ -1,0 +1,20 @@
+{
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "husky": "^4.2.5"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 80,
+    "tabWidth": 2
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": ".githooks/pre-commit.sh"
+    }
+  },
+  "dependencies": {}
+}

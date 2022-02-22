@@ -1,0 +1,14 @@
+{
+  "title": "Har du en idé? Låt oss komma i kontakt.",
+  "text": "Jag är öppen för förslag eller bara diskussioner. Fyll i formuläret nedan så hör jag av mig så fort jag kan.",
+  "name": "Namn",
+  "email": "Email",
+  "subject": "Ämne",
+  "message": "Meddelande",
+  "send": "Skicka",
+  "thanks": {
+    "title": "Tack för ditt meddelande!",
+    "text": "Jag hör av mig så fort som möjligt.",
+    "again": "Skicka ett nytt meddelande"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "dictionary": {
+    "read": "Read more"
+  },
+  "footer": {
+    "navigation": "Navigate",
+    "visit": "Visit",
+    "follow": "Follow",
+    "language": "Language"
+  },
+  "empty": {
+    "title": "Whoops! Lost in space?",
+    "text": "I suggest you head back home."
+  }
+}

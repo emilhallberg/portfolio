@@ -1,0 +1,95 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "react-scripts build",
+    "format:check": "prettier --check 'src/**/*' '!**/gen/**' '!**/__snapshots__/**' '!**/.DS_Store/**' '!src/**/*.svg'",
+    "lint:check": "eslint --max-warnings 0 'src/**/*'",
+    "precommit": "lint-staged",
+    "start": "react-scripts start",
+    "test": "echo testing..."
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,json,css,html,yaml,yml}": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "tabWidth": 2
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": [
+      "react-app",
+      "airbnb-typescript",
+      "prettier",
+      "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+      "no-underscore-dangle": 0
+    }
+  },
+  "eslintIgnore": [
+    "**/generated/**/*",
+    "**/*.json",
+    "**/*.graphql",
+    "**/*.snap",
+    "**/*.svg"
+  ],
+  "dependencies": {
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/styled-components": "^5.1.0",
+    "i18next": "^19.4.4",
+    "i18next-browser-languagedetector": "^6.0.1",
+    "i18next-http-backend": "^1.0.8",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-i18next": "^11.4.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.3",
+    "styled-components": "^5.1.0",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.2"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^16.9.7",
+    "@typescript-eslint/eslint-plugin": "^3.10.1",
+    "@typescript-eslint/parser": "^3.10.1",
+    "eslint-config-airbnb-typescript": "^9.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-react-app": "^5.2.1",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.2",
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.1.1"
+  }
+}

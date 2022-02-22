@@ -1,0 +1,14 @@
+{
+  "title": "Have an idea? Let's get in touch.",
+  "text": "I'm open to suggestions or just discussions. Fill out the form below and I'll get back to you as soon as possible.",
+  "name": "Name",
+  "email": "Email",
+  "subject": "Subject",
+  "message": "Message",
+  "send": "Send",
+  "thanks": {
+    "title": "Thank you for your message!",
+    "text": "I'll get back to you as soon as possible.",
+    "again": "Send a new message"
+  }
+}
