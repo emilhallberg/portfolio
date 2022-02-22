@@ -12,7 +12,7 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    name: Build and deploy server
+    name: Build and Deploy server
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
