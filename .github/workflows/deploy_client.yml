@@ -43,7 +43,7 @@ jobs:
       - name: Commit files
         run: |
           git clone "https://${{ secrets.INFRASTRUCTURE_USERNAME }}:${{ secrets.INFRASTRUCTURE_PASSWORD }}@${{ secrets.INFRASTRUCTURE_REPOSITORY }}" repo
-          cd repo/charts/jonas-portfolio/
+          cd repo/charts/emil-portfolio/
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           yq eval ".client.image = \"${{ env.IMAGE_REGISTRY }}:${{ env.SHA_SHORT }}\"" --inplace values.yaml
