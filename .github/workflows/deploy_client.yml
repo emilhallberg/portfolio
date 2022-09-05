@@ -23,7 +23,7 @@ jobs:
         with:
           registry: "${{ env.REGISTRY }}"
           username: "${{ github.actor }}"
-          password: "${{ secrets.GITHUB_TOKEN }}"
+          password: "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"
 
       - name: Set environment variables
         run: |
