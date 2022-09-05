@@ -44,7 +44,7 @@ const SSection = styled.section<AnimationProps>`
   align-content: center;
   background: ${Colors.background};
   text-align: center;
-  padding: 10vh 0;
+  padding: 7vh 0;
   @media (max-width: ${media.tablet}) {
     padding: 10vh ${tablet.padding};
   }
