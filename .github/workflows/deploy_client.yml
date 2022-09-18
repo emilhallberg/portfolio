@@ -5,9 +5,9 @@ on:
     branches:
       - main
     # paths:
-      # - "client/**"
+    #   - "client/**"
 env:
-  IMAGE_REGISTRY: "ghcr.io/emilhallberg"
+  REGISTRY: "ghcr.io/emilhallberg"
 
 jobs:
   deploy:
@@ -23,12 +23,12 @@ jobs:
         with:
           registry: "${{ env.REGISTRY }}"
           username: "${{ github.actor }}"
-          password: "dckr_pat_EqWclgSksQCAj3FozGhXaThucFs"
+          password: "${{ github.token }}"
 
       - name: Set environment variables
         run: |
           echo "SHA_SHORT=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-          echo "IMAGE_REGISTRY=emilhallberg/portfolio-client" >> $GITHUB_ENV
+          echo "IMAGE_REGISTRY=${{ env.REGISTRY }}/portfolio/client" >> $GITHUB_ENV
 
       - name: Build and push
         id: docker_build
