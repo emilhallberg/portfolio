@@ -7,7 +7,7 @@ on:
     # paths:
       # - "client/**"
 env:
-  IMAGE_REGISTRY: "ghcr.io/emilhallberg"
+  REGISTRY: "ghcr.io/emilhallberg"
 
 jobs:
   deploy:
