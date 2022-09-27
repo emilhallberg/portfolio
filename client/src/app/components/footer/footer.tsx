@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -68,7 +69,7 @@ const follow = [
   { label: "Instagram", path: "https://www.instagram.com/hallbergemil/" },
 ];
 
-const Footer: React.FC = () => {
+const Footer: FC = () => {
   const { t } = useTranslation();
   const { ref, visible } = useWhenInView(200);
   return (

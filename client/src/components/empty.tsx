@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Section from "./section";
@@ -22,7 +23,7 @@ const SLink = styled(Link)`
   }
 `;
 
-const Empty: React.FC = () => {
+const Empty: FC = () => {
   const { t } = useTranslation();
   return (
     <SEmpty>

@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import { hexa } from "../../../utils/library";
 import Colors from "../../../resources/stylesheets/colors";
@@ -26,7 +27,7 @@ export interface SlideProps {
   alt: string;
 }
 
-const Slide: React.FC<SlideProps> = ({ src, alt }: SlideProps) => (
+const Slide: FC<SlideProps> = ({ src, alt }: SlideProps) => (
   <SSlide src={src} alt={alt} />
 );
 

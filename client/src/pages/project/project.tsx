@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router";
 import { projects } from "../../resources/data/data";
@@ -38,7 +39,7 @@ const SExternal = styled(External)`
   }
 `;
 
-const Project: React.FC = () => {
+const Project: FC = () => {
   const { slug: s1 } = useParams<Record<string, string | undefined>>();
   const lang = useLanguage();
   const { ref, visible } = useWhenInView(150);

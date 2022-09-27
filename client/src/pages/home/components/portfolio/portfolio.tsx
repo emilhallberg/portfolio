@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import Section from "../../../../components/section";
 import { projects } from "../../../../resources/data/data";
@@ -27,7 +28,7 @@ const SProjects = styled.div`
   }
 `;
 
-const Portfolio: React.FC = () => {
+const Portfolio: FC = () => {
   const lang = useLanguage();
   return (
     <SSection>

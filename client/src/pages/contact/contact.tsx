@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Section from "../../components/section";
@@ -11,7 +12,7 @@ const SContact = styled.div`
   justify-self: center;
 `;
 
-const Contact: React.FC = () => {
+const Contact: FC = () => {
   const { t } = useTranslation("contact");
   return (
     <SContact>

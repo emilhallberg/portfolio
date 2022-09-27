@@ -1,3 +1,4 @@
+import { FC } from "react";
 import styled from "styled-components";
 import Greeting from "./components/greeting";
 import Background from "./components/background";
@@ -14,7 +15,7 @@ const SSection = styled(Section)`
   padding-top: 0;
 `;
 
-const Home: React.FC = () => (
+const Home: FC = () => (
   <SHome>
     <Background />
     <Greeting />
