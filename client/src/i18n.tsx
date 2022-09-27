@@ -1,8 +1,8 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import Backend from 'i18next-http-backend';
-import LanguageDetector from 'i18next-browser-languagedetector';
-import { Lang } from './utils/enums';
+import i18n from "i18next";
+import { initReactI18next } from "react-i18next";
+import Backend from "i18next-http-backend";
+import LanguageDetector from "i18next-browser-languagedetector";
+import { Lang } from "./utils/enums";
 
 i18n
   .use(Backend)
@@ -11,10 +11,9 @@ i18n
   .init({
     fallbackLng: Lang.SV,
     debug: false,
-    defaultNS: 'default',
-    ns: ['default', 'home', 'routes', 'portfolio', 'thesis', 'contact'],
+    defaultNS: "default",
+    ns: ["default", "home", "routes", "portfolio", "thesis", "contact"],
     lowerCaseLng: true,
-    whitelist: [Lang.SV, Lang.EN],
     supportedLngs: [Lang.SV, Lang.EN],
     interpolation: {
       escapeValue: false,

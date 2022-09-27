@@ -1,10 +1,10 @@
-import React from 'react';
+import { FC } from "react";
 
 interface LogoProps {
   className?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ className }: LogoProps) => (
+const Logo: FC<LogoProps> = ({ className }: LogoProps) => (
   <svg viewBox="0 0 140 140" width="100%" height="100%" className={className}>
     <path
       fill="currentColor"
@@ -27,9 +27,5 @@ const Logo: React.FC<LogoProps> = ({ className }: LogoProps) => (
     />
   </svg>
 );
-
-Logo.defaultProps = {
-  className: '',
-};
 
 export default Logo;

@@ -1,12 +1,12 @@
-import React from 'react';
+import { FC, ReactNode } from "react";
 
 export interface ExternalProps {
-  children: React.ReactChild | string;
+  children: ReactNode | string;
   to: string;
   className?: string;
 }
 
-const External: React.FC<ExternalProps> = ({
+const External: FC<ExternalProps> = ({
   className,
   children,
   to,

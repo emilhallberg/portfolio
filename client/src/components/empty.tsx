@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import Section from './section';
-import Link from './button/link';
-import Button from './button/button';
-import { home } from '../routes/paths';
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import Section from "./section";
+import Link from "./button/link";
+import Button from "./button/button";
+import { home } from "../routes/paths";
 
 const SEmpty = styled.div`
   display: grid;
@@ -28,10 +27,10 @@ const Empty: React.FC = () => {
   return (
     <SEmpty>
       <SSection>
-        <Section.Title>{t('empty.title')}</Section.Title>
-        <Section.Text>{t('empty.text')}</Section.Text>
+        <Section.Title>{t("empty.title")}</Section.Title>
+        <Section.Text>{t("empty.text")}</Section.Text>
         <SLink to={home.path}>
-          <Button label={t('routes:home')} />
+          <Button label={t("routes:home")} />
         </SLink>
       </SSection>
     </SEmpty>

@@ -1,14 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import useAtTopOffset from '../../../hooks/useAtTopOffset';
-import { d } from '../../../resources/stylesheets/dimensions';
-import Colors from '../../../resources/stylesheets/colors';
-import Button from '../../../components/button/button';
-import { fadeIn } from '../../../resources/animations/animations';
-import { contact } from '../../../routes/paths';
-import media from '../../../resources/stylesheets/media';
+import { FC } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import useAtTopOffset from "../../../hooks/useAtTopOffset";
+import { d } from "../../../resources/stylesheets/dimensions";
+import Colors from "../../../resources/stylesheets/colors";
+import Button from "../../../components/button/button";
+import { fadeIn } from "../../../resources/animations/animations";
+import { contact } from "../../../routes/paths";
+import media from "../../../resources/stylesheets/media";
 
 interface SActiveProps {
   active: boolean;
@@ -19,9 +19,9 @@ const SGreeting = styled.div<SActiveProps>`
   justify-items: center;
   align-content: flex-end;
   grid-template-rows: 1fr max-content 16px max-content 32px max-content 200px;
-  grid-template-areas: '.' 'title' '.' 'subTitle' '.' 'link' '.';
+  grid-template-areas: "." "title" "." "subTitle" "." "link" ".";
   background-color: ${({ active }) =>
-    active ? Colors.background : 'transparent'};
+    active ? Colors.background : "transparent"};
   transition: background-color 300ms ease-out;
   height: calc(100vh - ${d.header});
 `;
@@ -55,16 +55,16 @@ const SLink = styled(Link)`
   }
 `;
 
-const Greeting: React.FC = () => {
-  const { t } = useTranslation('home');
+const Greeting: FC = () => {
+  const { t } = useTranslation("home");
   const activeTitle = useAtTopOffset(300);
   const activeBackground = useAtTopOffset(150);
   return (
     <SGreeting active={activeBackground}>
-      <STitle active={activeTitle}>{t('greeting.title')}</STitle>
-      <SSubTitle active={activeTitle}>{t('greeting.subTitle')}</SSubTitle>
+      <STitle active={activeTitle}>{t("greeting.title")}</STitle>
+      <SSubTitle active={activeTitle}>{t("greeting.subTitle")}</SSubTitle>
       <SLink active={activeTitle ? 1 : 0} to={contact.path}>
-        <Button label={t('greeting.button')} />
+        <Button label={t("greeting.button")} />
       </SLink>
     </SGreeting>
   );

@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import media from '../../../resources/stylesheets/media';
-import { phone, tablet } from '../../../resources/stylesheets/dimensions';
-import Slide, { SlideProps } from './slide';
+import { FC, ReactNode } from "react";
+import styled from "styled-components";
+import media from "../../../resources/stylesheets/media";
+import { phone, tablet } from "../../../resources/stylesheets/dimensions";
+import Slide from "./slide";
 
 const SSlider = styled.div`
   display: grid;
@@ -24,7 +24,7 @@ const SSlider = styled.div`
     padding-left: ${tablet.padding};
     justify-content: flex-start;
     &:after {
-      content: '';
+      content: "";
       padding-right: calc(${phone.padding} / 2);
     }
   }
@@ -32,23 +32,23 @@ const SSlider = styled.div`
     grid-gap: 16px;
     padding-left: ${phone.padding};
     &:after {
-      content: '';
+      content: "";
       padding-right: calc(${phone.padding} / 2 - 5px);
     }
   }
 `;
 
-interface SliderComp<T> extends React.FC<T> {
-  Slide: React.FC<SlideProps>;
+interface SliderComp<T> extends FC<T> {
+  Slide: typeof Slide;
 }
 
 interface SliderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-const Slider: SliderComp<SliderProps> = ({ children }: SliderProps) => {
-  return <SSlider>{children}</SSlider>;
-};
+const Slider: SliderComp<SliderProps> = ({ children }: SliderProps) => (
+  <SSlider>{children}</SSlider>
+);
 
 Slider.Slide = Slide;
 

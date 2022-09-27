@@ -1,11 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import media from '../resources/stylesheets/media';
-import { phone, tablet } from '../resources/stylesheets/dimensions';
-import Colors from '../resources/stylesheets/colors';
-import useWhenInView from '../hooks/useWhenInView';
-import { AnimationProps, slideUp } from '../resources/animations/animations';
-import Fonts from '../resources/stylesheets/fonts';
+import { FC, ReactNode } from "react";
+import styled from "styled-components";
+import media from "../resources/stylesheets/media";
+import { phone, tablet } from "../resources/stylesheets/dimensions";
+import Colors from "../resources/stylesheets/colors";
+import useWhenInView from "../hooks/useWhenInView";
+import { AnimationProps, slideUp } from "../resources/animations/animations";
+import Fonts from "../resources/stylesheets/fonts";
 
 const STitle = styled.h3`
   color: ${Colors.text};
@@ -56,16 +56,16 @@ const SSection = styled.section<AnimationProps>`
   }
 `;
 
-interface SectionComp<T> extends React.FC<T> {
-  Title: React.FC;
-  Text: React.FC;
-  Category: React.FC;
-  Bullet: React.FC;
+interface SectionComp<T> extends FC<T> {
+  Title: typeof STitle;
+  Text: typeof SText;
+  Category: typeof SCategory;
+  Bullet: typeof SBullet;
 }
 
 interface SectionProps {
   className?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const Section: SectionComp<SectionProps> = ({
@@ -78,10 +78,6 @@ const Section: SectionComp<SectionProps> = ({
       {children}
     </SSection>
   );
-};
-
-Section.defaultProps = {
-  className: '',
 };
 
 Section.Title = STitle;

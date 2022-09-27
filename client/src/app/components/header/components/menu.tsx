@@ -1,16 +1,17 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
-import Hamburger from './hamburger';
-import Colors from '../../../../resources/stylesheets/colors';
-import { hexa } from '../../../../utils/library';
-import useComponentVisible from '../../../../hooks/useComponentVisible';
-import { MenuContext } from './menuContext';
-import Dropdown from './dropdown';
-import media from '../../../../resources/stylesheets/media';
-import routes from '../../../../routes/routes';
-import Locale from '../../footer/components/locale';
+import { useLocation } from "react-router";
+import { FC, useCallback, useMemo } from "react";
+import styled, { css } from "styled-components";
+import { useTranslation } from "react-i18next";
+import { NavLink } from "react-router-dom";
+import Hamburger from "./hamburger";
+import Colors from "../../../../resources/stylesheets/colors";
+import { hexa } from "../../../../utils/library";
+import useComponentVisible from "../../../../hooks/useComponentVisible";
+import { MenuContext } from "./menuContext";
+import Dropdown from "./dropdown";
+import media from "../../../../resources/stylesheets/media";
+import routes from "../../../../routes/routes";
+import Locale from "../../footer/components/locale";
 
 const SContainer = styled.div`
   display: none;
@@ -42,7 +43,7 @@ const SDot = styled.div`
   transition: all 200ms ease-out;
 `;
 
-const SButton = styled(NavLink)`
+const SButton = styled(NavLink)<{ $active: boolean }>`
   display: grid;
   align-items: center;
   position: relative;
@@ -50,12 +51,15 @@ const SButton = styled(NavLink)`
   opacity: 0.5;
   transition: opacity 200ms ease-out;
   padding: 8px 16px;
-  &.active {
-    opacity: 1;
-    ${SDot} {
-      height: 100%;
-    }
-  }
+
+  ${({ $active }) =>
+    $active &&
+    css`
+      opacity: 1;
+      ${SDot} {
+        height: 100%;
+      }
+    `}
   &:hover {
     opacity: 1;
     text-decoration: none;
@@ -65,23 +69,39 @@ const SButton = styled(NavLink)`
   }
 `;
 
-const Menu: React.FC = () => {
-  const { t } = useTranslation('routes');
+const Menu: FC = () => {
+  const { t } = useTranslation("routes");
   const { ref, visible: open, isVisible: isOpen } = useComponentVisible(false);
+  const location = useLocation();
 
-  const close = (): void => isOpen(false);
+  const close = useCallback((): void => isOpen(false), [isOpen]);
+
+  const value = useMemo(
+    () => ({
+      open,
+      close,
+    }),
+    [close, open],
+  );
 
   return (
-    <MenuContext.Provider value={{ open, close }}>
+    <MenuContext.Provider value={value}>
       <SContainer ref={ref}>
         <Hamburger isOpen={(): void => isOpen((v) => !v)} />
         <Dropdown>
           {routes
             .filter(({ header }) => header)
             .map(({ key, path }) => (
-              <SButton key={key} exact to={path} onClick={close}>
-                {t(`${key}`)}
-                <SDot />
+              <SButton
+                key={key}
+                to={path}
+                onClick={close}
+                $active={location.pathname === path}
+              >
+                <>
+                  {t(`${key}`)}
+                  <SDot />
+                </>
               </SButton>
             ))}
           <SBreak />

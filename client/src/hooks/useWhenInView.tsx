@@ -1,4 +1,4 @@
-import { Ref, useCallback, useEffect, useRef, useState } from 'react';
+import { Ref, useCallback, useEffect, useRef, useState } from "react";
 
 interface Props {
   ref: Ref<HTMLDivElement>;
@@ -13,16 +13,16 @@ const useWhenInView = (offset: number): Props => {
     if (ref.current) {
       isVisible(
         ref.current.getBoundingClientRect().top <=
-          document.documentElement.clientHeight - offset
+          document.documentElement.clientHeight - offset,
       );
     }
   }, [offset]);
 
   useEffect(() => {
     handleScroll();
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
 

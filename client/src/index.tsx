@@ -1,14 +1,8 @@
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
-import './i18n';
-import App from './app/app';
-import Loader from './components/loading';
-import Global from './resources/stylesheets/global';
+import { createRoot } from "react-dom/client";
+import React from "react";
+import App from "./app/app";
+import "./i18n";
 
-ReactDOM.render(
-  <Suspense fallback={<Loader />}>
-    <Global />
-    <App />
-  </Suspense>,
-  document.getElementById('root')
-);
+const container = document.getElementById("root");
+const root = createRoot(container!);
+root.render(<App />);

@@ -1,8 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { hexa } from '../../../utils/library';
-import Colors from '../../../resources/stylesheets/colors';
-import media from '../../../resources/stylesheets/media';
+import styled from "styled-components";
+import { hexa } from "../../../utils/library";
+import Colors from "../../../resources/stylesheets/colors";
+import media from "../../../resources/stylesheets/media";
 
 const SSlide = styled.img`
   height: 320px;
@@ -27,8 +26,8 @@ export interface SlideProps {
   alt: string;
 }
 
-const Slide: React.FC<SlideProps> = ({ src, alt }: SlideProps) => {
-  return <SSlide src={src} alt={alt} />;
-};
+const Slide: React.FC<SlideProps> = ({ src, alt }: SlideProps) => (
+  <SSlide src={src} alt={alt} />
+);
 
 export default Slide;

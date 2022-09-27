@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components';
-import Colors from './colors';
-import Fonts from './fonts';
+import { createGlobalStyle } from "styled-components";
+import Colors from "./colors";
+import Fonts from "./fonts";
 
 const Global = createGlobalStyle`
    body {

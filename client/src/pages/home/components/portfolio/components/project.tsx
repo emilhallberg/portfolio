@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import { hexa } from '../../../../../utils/library';
-import Colors from '../../../../../resources/stylesheets/colors';
-import Fonts from '../../../../../resources/stylesheets/fonts';
-import Link, { LinkProps } from '../../../../../components/button/link';
+import React from "react";
+import styled from "styled-components";
+import { hexa } from "../../../../../utils/library";
+import Colors from "../../../../../resources/stylesheets/colors";
+import Fonts from "../../../../../resources/stylesheets/fonts";
+import Link, { LinkProps } from "../../../../../components/button/link";
 import {
   AnimationProps,
   slideUp,
-} from '../../../../../resources/animations/animations';
-import useWhenInView from '../../../../../hooks/useWhenInView';
-import Image, { ImageProps } from './image';
-import media from '../../../../../resources/stylesheets/media';
+} from "../../../../../resources/animations/animations";
+import useWhenInView from "../../../../../hooks/useWhenInView";
+import Image, { ImageProps } from "./image";
+import media from "../../../../../resources/stylesheets/media";
 
 const SProject = styled.div<AnimationProps>`
   display: grid;
@@ -44,7 +44,7 @@ const SLink = styled(Link)`
   display: grid;
   grid-template-columns: 16px 288px 16px;
   grid-template-rows: 2fr max-content 70px;
-  grid-template-areas: 'image image image' '. category .' '. title .';
+  grid-template-areas: "image image image" ". category ." ". title .";
   grid-gap: 0;
   grid-row: auto / span 10;
   text-align: center;
@@ -75,9 +75,9 @@ const STitle = styled.h4`
 `;
 
 interface ProjectComp<T> extends React.FC<LinkProps> {
-  Image: React.FC<ImageProps>;
-  Category: React.FC;
-  Title: React.FC;
+  Image: typeof Image;
+  Category: typeof SCategory;
+  Title: typeof STitle;
 }
 
 interface ProjectProps {

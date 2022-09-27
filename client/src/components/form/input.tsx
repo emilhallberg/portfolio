@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
-import styled from 'styled-components';
-import Fonts from '../../resources/stylesheets/fonts';
-import Colors from '../../resources/stylesheets/colors';
+import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
+import styled from "styled-components";
+import Fonts from "../../resources/stylesheets/fonts";
+import Colors from "../../resources/stylesheets/colors";
 
 const SContainer = styled.div`
   position: relative;
@@ -43,7 +43,7 @@ interface SHeaderProps {
 
 const SHeader = styled.i<SHeaderProps>`
   position: absolute;
-  top: ${({ active }): string => (active ? '20px' : '0px')};
+  top: ${({ active }): string => (active ? "20px" : "0px")};
   left: 10px;
   font-size: ${({ active }): string =>
     active ? Fonts.Size.regular : Fonts.Size.smallX};
@@ -58,7 +58,7 @@ interface InputProps {
   label: string;
   name: string;
   value?: string;
-  onChange: (e: ChangeEvent) => void;
+  onChange: unknown;
   required?: boolean;
   minLength?: number;
   maxLength?: number;
@@ -81,8 +81,8 @@ const Input: React.FC<InputProps> = ({
       <SEnter
         type={type}
         name={name}
-        value={value || ''}
-        onChange={onChange}
+        value={value || ""}
+        onChange={onChange as ChangeEventHandler<HTMLInputElement>}
         required={required}
         minLength={minLength}
         maxLength={maxLength}
@@ -94,7 +94,7 @@ const Input: React.FC<InputProps> = ({
 };
 
 Input.defaultProps = {
-  value: '',
+  value: "",
   required: false,
   minLength: 0,
   maxLength: 255,

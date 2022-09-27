@@ -1,6 +1,6 @@
-import React from 'react';
-import styled from 'styled-components';
-import useAtTopOffset from '../../../hooks/useAtTopOffset';
+import { FC } from "react";
+import styled from "styled-components";
+import useAtTopOffset from "../../../hooks/useAtTopOffset";
 
 interface SImageProps {
   active: boolean;
@@ -20,10 +20,10 @@ const SBackground = styled.div<SImageProps>`
   opacity: 0.5;
   z-index: -1;
   transition: all 400ms ease-in-out;
-  filter: blur(${({ active }) => (active ? '3px' : 0)});
+  filter: blur(${({ active }) => (active ? "3px" : 0)});
 `;
 
-const Background: React.FC = () => {
+const Background: FC = () => {
   const active = useAtTopOffset(25);
   return (
     <SBackground
