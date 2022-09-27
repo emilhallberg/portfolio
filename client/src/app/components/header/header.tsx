@@ -1,18 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
+import { FC } from "react";
+import styled from "styled-components";
 import {
   computer,
   d,
   phone,
   tablet,
-} from '../../../resources/stylesheets/dimensions';
-import Logo from '../../../resources/assets/logo';
-import Colors from '../../../resources/stylesheets/colors';
-import media from '../../../resources/stylesheets/media';
-import Navigation from './components/navigation';
-import useAtTopOffset from '../../../hooks/useAtTopOffset';
-import Menu from './components/menu';
-import Link from '../../../components/button/link';
+} from "../../../resources/stylesheets/dimensions";
+import Logo from "../../../resources/assets/logo";
+import Colors from "../../../resources/stylesheets/colors";
+import media from "../../../resources/stylesheets/media";
+import Navigation from "./components/navigation";
+import useAtTopOffset from "../../../hooks/useAtTopOffset";
+import Menu from "./components/menu";
+import Link from "../../../components/button/link";
 
 interface SHeaderProps {
   active: boolean;
@@ -27,7 +27,7 @@ const SHeader = styled.header<SHeaderProps>`
   position: sticky;
   top: 0;
   background-color: ${({ active }) =>
-    active ? Colors.background : 'transparent'};
+    active ? Colors.background : "transparent"};
   color: ${Colors.text};
   transition: all 200ms ease-out;
   padding: 0 ${computer.padding};
@@ -40,7 +40,7 @@ const SHeader = styled.header<SHeaderProps>`
   }
 `;
 
-const Header: React.FC = () => {
+const Header: FC = () => {
   const active = useAtTopOffset(100);
 
   return (

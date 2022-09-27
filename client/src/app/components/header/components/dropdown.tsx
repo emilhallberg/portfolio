@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import { hexa } from '../../../../utils/library';
-import Colors from '../../../../resources/stylesheets/colors';
-import { slideDown } from '../../../../resources/animations/animations';
-import { MenuContext } from './menuContext';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import { hexa } from "../../../../utils/library";
+import Colors from "../../../../resources/stylesheets/colors";
+import { slideDown } from "../../../../resources/animations/animations";
+import { MenuContext } from "./menuContext";
 
 const width = 280;
 

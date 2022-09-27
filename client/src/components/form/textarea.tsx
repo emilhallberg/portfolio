@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useState } from 'react';
-import styled from 'styled-components';
-import Fonts from '../../resources/stylesheets/fonts';
-import Colors from '../../resources/stylesheets/colors';
+import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
+import styled from "styled-components";
+import Fonts from "../../resources/stylesheets/fonts";
+import Colors from "../../resources/stylesheets/colors";
 
 const SContainer = styled.div`
   position: relative;
@@ -40,7 +40,7 @@ interface SHeaderProps {
 
 const SHeader = styled.i<SHeaderProps>`
   position: absolute;
-  top: ${({ active }): string => (active ? '20px' : '0px')};
+  top: ${({ active }): string => (active ? "20px" : "0px")};
   left: 10px;
   right: 10px;
   text-align: left;
@@ -56,7 +56,7 @@ const SHeader = styled.i<SHeaderProps>`
 const SCounter = styled.i`
   position: absolute;
   opacity: ${({ active }: SHeaderProps): number => (active ? 0 : 1)};
-  bottom: ${({ active }: SHeaderProps): string => (active ? '0px' : '-20px')};
+  bottom: ${({ active }: SHeaderProps): string => (active ? "0px" : "-20px")};
   right: 10px;
   font-size: ${Fonts.Size.small};
   font-weight: ${Fonts.Weight.regular};
@@ -70,7 +70,7 @@ interface TextareaProps {
   label: string;
   name: string;
   value?: string;
-  onChange: (e: ChangeEvent) => void;
+  onChange: unknown;
   required?: boolean;
   minLength?: number;
   maxLength?: number;
@@ -91,8 +91,8 @@ const Textarea: React.FC<TextareaProps> = ({
       <SHeader active={isEmpty}>{label}</SHeader>
       <SEnter
         name={name}
-        value={value || ''}
-        onChange={onChange}
+        value={value || ""}
+        onChange={onChange as ChangeEventHandler<HTMLTextAreaElement>}
         required={required}
         minLength={minLength}
         maxLength={maxLength}
@@ -108,7 +108,7 @@ const Textarea: React.FC<TextareaProps> = ({
 };
 
 Textarea.defaultProps = {
-  value: '',
+  value: "",
   required: false,
   minLength: 0,
   maxLength: 255,

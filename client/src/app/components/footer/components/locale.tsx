@@ -1,9 +1,9 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
-import { TFunction } from 'i18next';
-import { Lang } from '../../../../utils/enums';
-import Click from '../../../../components/button/click';
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styled from "styled-components";
+import { TFunction } from "i18next";
+import { Lang } from "../../../../utils/enums";
+import Click from "../../../../components/button/click";
 
 const SContainer = styled.div`
   display: grid;
@@ -23,7 +23,7 @@ const SLanguage = styled.h6<SLanguageProps>`
   }
 `;
 
-const Locale: React.FC = () => {
+const Locale: FC = () => {
   const { i18n } = useTranslation();
 
   return (

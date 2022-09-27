@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import { FC, ReactNode } from "react";
+import styled from "styled-components";
 
 const SContainer = styled.button`
   cursor: pointer;
@@ -7,23 +7,18 @@ const SContainer = styled.button`
 `;
 
 interface SubmitProps {
-  children: React.ReactChild;
+  children: ReactNode;
   className?: string;
 }
 
-const Submit: React.FC<SubmitProps> = ({
-  children,
-  className,
-}: SubmitProps) => {
-  return (
-    <SContainer type="submit" className={className} tabIndex={0}>
-      {children}
-    </SContainer>
-  );
-};
+const Submit: FC<SubmitProps> = ({ children, className }: SubmitProps) => (
+  <SContainer type="submit" className={className} tabIndex={0}>
+    {children}
+  </SContainer>
+);
 
 Submit.defaultProps = {
-  className: '',
+  className: "",
 };
 
 export default Submit;

@@ -5,7 +5,7 @@ import {
   useEffect,
   Dispatch,
   SetStateAction,
-} from 'react';
+} from "react";
 
 interface UseComponentVisible {
   ref: RefObject<HTMLDivElement>;
@@ -18,7 +18,7 @@ const useComponentVisible = (init: boolean): UseComponentVisible => {
   const ref = useRef<HTMLDivElement>(null);
 
   const handleHideDropdown = (event: KeyboardEvent): void => {
-    if (event.key === 'Escape') {
+    if (event.key === "Escape") {
       isVisible(false);
     }
   };
@@ -30,11 +30,11 @@ const useComponentVisible = (init: boolean): UseComponentVisible => {
   };
 
   useEffect(() => {
-    document.addEventListener('keydown', handleHideDropdown, true);
-    document.addEventListener('click', handleClickOutside, true);
+    document.addEventListener("keydown", handleHideDropdown, true);
+    document.addEventListener("click", handleClickOutside, true);
     return (): void => {
-      document.removeEventListener('keydown', handleHideDropdown, true);
-      document.removeEventListener('click', handleClickOutside, true);
+      document.removeEventListener("keydown", handleHideDropdown, true);
+      document.removeEventListener("click", handleClickOutside, true);
     };
   });
 

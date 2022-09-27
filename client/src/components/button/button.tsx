@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import Fonts from '../../resources/stylesheets/fonts';
-import { hexo } from '../../utils/library';
-import Colors from '../../resources/stylesheets/colors';
+import React, { useState } from "react";
+import styled from "styled-components";
+import Fonts from "../../resources/stylesheets/fonts";
+import { hexo } from "../../utils/library";
+import Colors from "../../resources/stylesheets/colors";
 
-const duration = '350ms';
+const duration = "350ms";
 
 const SContainer = styled.div`
   position: relative;
@@ -98,6 +98,6 @@ const Button: React.FC<ButtonProps> = ({ label, className }: ButtonProps) => {
   );
 };
 
-Button.defaultProps = { className: '' };
+Button.defaultProps = { className: "" };
 
 export default Button;

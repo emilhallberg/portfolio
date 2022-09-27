@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useParams } from 'react-router';
-import { projects } from '../../resources/data/data';
-import Section from '../../components/section';
-import useLanguage from '../../hooks/useLanguage';
-import Slider from './components/slider';
-import Empty from '../../components/empty';
-import External from '../../components/button/external';
-import Button from '../../components/button/button';
-import { slideUp } from '../../resources/animations/animations';
-import useWhenInView from '../../hooks/useWhenInView';
-import media from '../../resources/stylesheets/media';
+import { FC } from "react";
+import styled from "styled-components";
+import { useParams } from "react-router";
+import { projects } from "../../resources/data/data";
+import Section from "../../components/section";
+import useLanguage from "../../hooks/useLanguage";
+import Slider from "./components/slider";
+import Empty from "../../components/empty";
+import External from "../../components/button/external";
+import Button from "../../components/button/button";
+import { slideUp } from "../../resources/animations/animations";
+import useWhenInView from "../../hooks/useWhenInView";
+import media from "../../resources/stylesheets/media";
 
 const SProject = styled.div`
   display: grid;
@@ -39,12 +39,8 @@ const SExternal = styled(External)`
   }
 `;
 
-interface Params {
-  slug: string;
-}
-
-const Project: React.FC = () => {
-  const { slug: s1 } = useParams<Params>();
+const Project: FC = () => {
+  const { slug: s1 } = useParams<Record<string, string | undefined>>();
   const lang = useLanguage();
   const { ref, visible } = useWhenInView(150);
   const project = projects.find(({ slug: s2 }) => s1 === s2);
@@ -53,7 +49,7 @@ const Project: React.FC = () => {
   const { category, title, text, images, links } = project;
 
   const texts = text[lang]
-    .split('\n')
+    .split("\n")
     .map((x) => <Section.Text key={x}>{x}</Section.Text>);
 
   return (

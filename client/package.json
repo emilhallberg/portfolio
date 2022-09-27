@@ -5,19 +5,9 @@
   "license": "MIT",
   "scripts": {
     "build": "react-scripts build",
-    "format:check": "prettier --check 'src/**/*' '!**/gen/**' '!**/__snapshots__/**' '!**/.DS_Store/**' '!src/**/*.svg'",
-    "lint:check": "eslint --max-warnings 0 'src/**/*'",
-    "precommit": "lint-staged",
+    "eject": "react-scripts eject",
     "start": "react-scripts start",
-    "test": "echo testing..."
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,css,html,yaml,yml}": [
-      "prettier --write"
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "eslint"
-    ]
+    "lint": "eslint --max-warnings 0 'src/**/*'"
   },
   "browserslist": {
     "production": [
@@ -33,63 +23,79 @@
   },
   "prettier": {
     "printWidth": 80,
-    "singleQuote": true,
-    "tabWidth": 2
+    "semi": true,
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "all"
   },
   "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "project": "./tsconfig.json"
+    "env": {
+      "browser": true,
+      "es2021": true
     },
     "extends": [
-      "react-app",
-      "airbnb-typescript",
+      "plugin:react/recommended",
+      "airbnb",
       "prettier",
-      "plugin:@typescript-eslint/recommended"
+      "plugin:react-hooks/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaFeatures": {
+        "jsx": true
+      },
+      "ecmaVersion": "latest",
+      "sourceType": "module"
+    },
+    "plugins": [
+      "react",
+      "@typescript-eslint"
     ],
     "rules": {
-      "no-underscore-dangle": 0
+      "react/function-component-definition": 0,
+      "react/jsx-filename-extension": 0,
+      "react/react-in-jsx-scope": 0,
+      "import/no-extraneous-dependencies": 0,
+      "import/no-unresolved": 0,
+      "import/extensions": 0,
+      "no-unused-vars": 0,
+      "react/require-default-props": 0,
+      "no-shadow": 0,
+      "react-hooks/exhaustive-deps": "error"
     }
   },
-  "eslintIgnore": [
-    "**/generated/**/*",
-    "**/*.json",
-    "**/*.graphql",
-    "**/*.snap",
-    "**/*.svg"
-  ],
   "dependencies": {
-    "@types/enzyme": "^3.10.5",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/styled-components": "^5.1.0",
-    "i18next": "^19.4.4",
-    "i18next-browser-languagedetector": "^6.0.1",
-    "i18next-http-backend": "^1.0.8",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-i18next": "^11.4.0",
-    "react-router": "^5.2.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.3",
-    "styled-components": "^5.1.0",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.2"
+    "@types/react-router-dom": "^5.3.3",
+    "@types/styled-components": "^5.1.26",
+    "i18next": "^21.9.2",
+    "i18next-browser-languagedetector": "^6.1.5",
+    "i18next-http-backend": "^1.4.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^11.18.6",
+    "react-router": "^6.4.1",
+    "react-router-dom": "^6.4.1",
+    "react-scripts": "5.0.1",
+    "styled-components": "^5.3.5",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
   },
   "devDependencies": {
-    "@types/react-dom": "^16.9.7",
-    "@typescript-eslint/eslint-plugin": "^3.10.1",
-    "@typescript-eslint/parser": "^3.10.1",
-    "eslint-config-airbnb-typescript": "^9.0.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-config-react-app": "^5.2.1",
-    "eslint-plugin-flowtype": "^5.2.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.2",
-    "lint-staged": "^10.2.2",
-    "prettier": "^2.1.1"
+    "@types/react-dom": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
   }
 }

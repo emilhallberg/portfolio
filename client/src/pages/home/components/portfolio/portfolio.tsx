@@ -1,12 +1,12 @@
-import React from 'react';
-import styled from 'styled-components';
-import Section from '../../../../components/section';
-import { projects } from '../../../../resources/data/data';
-import Project from './components/project';
-import useLanguage from '../../../../hooks/useLanguage';
-import media from '../../../../resources/stylesheets/media';
-import { phone } from '../../../../resources/stylesheets/dimensions';
-import { portfolio } from '../../../../routes/paths';
+import { FC } from "react";
+import styled from "styled-components";
+import Section from "../../../../components/section";
+import { projects } from "../../../../resources/data/data";
+import Project from "./components/project";
+import useLanguage from "../../../../hooks/useLanguage";
+import media from "../../../../resources/stylesheets/media";
+import { phone } from "../../../../resources/stylesheets/dimensions";
+import { portfolio } from "../../../../routes/paths";
 
 const SSection = styled(Section)`
   padding-bottom: 0;
@@ -28,7 +28,7 @@ const SProjects = styled.div`
   }
 `;
 
-const Portfolio: React.FC = () => {
+const Portfolio: FC = () => {
   const lang = useLanguage();
   return (
     <SSection>

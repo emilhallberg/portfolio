@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import Input from './input';
-import Textarea from './textarea';
-import Submit from '../button/submit';
-import { slideUp } from '../../resources/animations/animations';
+import { FC, FormEvent, ReactNode } from "react";
+import styled from "styled-components";
+import Input from "./input";
+import Textarea from "./textarea";
+import Submit from "../button/submit";
+import { slideUp } from "../../resources/animations/animations";
 
 const SForm = styled.form`
   ${slideUp};
@@ -16,29 +16,27 @@ const SForm = styled.form`
   padding: 32px 0;
 `;
 
-interface FormComp<T> extends React.FC<T> {
+interface FormComp<T> extends FC<T> {
   Input: typeof Input;
   Textarea: typeof Textarea;
   Submit: typeof Submit;
 }
 
 interface SectionProps {
-  onSubmit: (e: React.FormEvent) => Promise<void>;
+  onSubmit: (e: FormEvent) => Promise<void>;
   active: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const Form: FormComp<SectionProps> = ({
   onSubmit,
   active,
   children,
-}: SectionProps) => {
-  return (
-    <SForm active={active} onSubmit={onSubmit}>
-      {children}
-    </SForm>
-  );
-};
+}: SectionProps) => (
+  <SForm active={active} onSubmit={onSubmit}>
+    {children}
+  </SForm>
+);
 
 Form.Input = Input;
 Form.Textarea = Textarea;

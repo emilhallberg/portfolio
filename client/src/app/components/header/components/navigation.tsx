@@ -1,10 +1,11 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import routes from '../../../../routes/routes';
-import Colors from '../../../../resources/stylesheets/colors';
-import media from '../../../../resources/stylesheets/media';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import styled, { css } from "styled-components";
+import { NavLink } from "react-router-dom";
+import { useLocation } from "react-router";
+import routes from "../../../../routes/routes";
+import Colors from "../../../../resources/stylesheets/colors";
+import media from "../../../../resources/stylesheets/media";
 
 const SNavigation = styled.nav`
   display: grid;
@@ -32,7 +33,7 @@ const SDot = styled.div`
   transition: width 200ms ease-out;
 `;
 
-const SButton = styled(NavLink)`
+const SButton = styled(NavLink)<{ $active: boolean }>`
   display: grid;
   justify-items: center;
   align-items: center;
@@ -40,12 +41,15 @@ const SButton = styled(NavLink)`
   height: 100%;
   opacity: 0.5;
   transition: opacity 200ms ease-out;
-  &.active {
-    opacity: 1;
-    ${SDot} {
-      width: 100%;
-    }
-  }
+  ${({ $active }) =>
+    $active &&
+    css`
+      opacity: 1;
+      text-decoration: none;
+      ${SDot} {
+        width: 100%;
+      }
+    `}
   &:hover {
     opacity: 1;
     text-decoration: none;
@@ -56,15 +60,18 @@ const SButton = styled(NavLink)`
 `;
 
 const Navigation: React.FC = () => {
-  const { t } = useTranslation('routes');
+  const { t } = useTranslation("routes");
+  const location = useLocation();
   return (
     <SNavigation>
       {routes
         .filter(({ header }) => header)
         .map(({ key, path }) => (
-          <SButton key={key} exact to={path}>
-            {t(`${key}`)}
-            <SDot />
+          <SButton key={key} to={path} $active={location.pathname === path}>
+            <>
+              {t(`${key}`)}
+              <SDot />
+            </>
           </SButton>
         ))}
     </SNavigation>

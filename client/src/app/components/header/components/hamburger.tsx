@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
-import Colors from '../../../../resources/stylesheets/colors';
-import { MenuContext } from './menuContext';
+import React, { useContext } from "react";
+import styled from "styled-components";
+import Colors from "../../../../resources/stylesheets/colors";
+import { MenuContext } from "./menuContext";
 
-const height = '16px';
-const width = '23px';
-const lineSize = '2px';
+const height = "16px";
+const width = "23px";
+const lineSize = "2px";
 const center = `calc(50% - (${lineSize}/2))`;
 
 const SHamburger = styled.div`
@@ -24,16 +24,16 @@ interface SLineProps {
 }
 
 const firstChild = ({ open }: { open: boolean }): string =>
-  open ? `top: ${center}; width: 0%; left: 50%;` : 'top: 0px;';
+  open ? `top: ${center}; width: 0%; left: 50%;` : "top: 0px;";
 
 const secondChild = ({ open }: { open: boolean }): string =>
-  open ? 'transform: rotate(45deg);' : `top: ${center};`;
+  open ? "transform: rotate(45deg);" : `top: ${center};`;
 
 const thirdChild = ({ open }: { open: boolean }): string =>
-  open ? 'transform: rotate(-45deg);' : `top: ${center};`;
+  open ? "transform: rotate(-45deg);" : `top: ${center};`;
 
 const fourthChild = ({ open }: { open: boolean }): string =>
-  open ? `bottom: ${center}; width: 0%; left: 50%;` : 'bottom: 0;';
+  open ? `bottom: ${center}; width: 0%; left: 50%;` : "bottom: 0;";
 
 const SLine = styled.div<SLineProps>`
   position: absolute;
@@ -81,7 +81,7 @@ const Hamburger: React.FC<Props> = ({ isOpen, className }: Props) => {
 };
 
 Hamburger.defaultProps = {
-  className: '',
+  className: "",
 };
 
 export default Hamburger;

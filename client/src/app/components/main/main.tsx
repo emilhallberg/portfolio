@@ -1,9 +1,9 @@
-import React from 'react';
-import { Route, Switch } from 'react-router';
-import styled from 'styled-components';
-import routes from '../../../routes/routes';
-import { d } from '../../../resources/stylesheets/dimensions';
-import Empty from '../../../components/empty';
+import React from "react";
+import { Routes, Route } from "react-router";
+import styled from "styled-components";
+import routes from "../../../routes/routes";
+import { d } from "../../../resources/stylesheets/dimensions";
+import Empty from "../../../components/empty";
 
 const SMain = styled.main`
   grid-area: main;
@@ -12,21 +12,15 @@ const SMain = styled.main`
   z-index: 0;
 `;
 
-const Main: React.FC = () => {
-  return (
-    <SMain>
-      <Switch>
-        {routes.map(({ path, container }) => (
-          <Route key={path} path={path} exact>
-            {container}
-          </Route>
-        ))}
-        <Route>
-          <Empty />
-        </Route>
-      </Switch>
-    </SMain>
-  );
-};
+const Main: React.FC = () => (
+  <SMain>
+    <Routes>
+      {routes.map(({ path, container }) => (
+        <Route key={path} path={path} element={container} />
+      ))}
+      <Route path="*" element={<Empty />} />
+    </Routes>
+  </SMain>
+);
 
 export default Main;
