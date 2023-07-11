@@ -348,4 +348,100 @@ export const projects: ProjectProps[] = [
       },
     ],
   },
+  {
+    id: 13,
+    title: {
+      sv: "Creator Studio - Brandsite",
+      en: "Creator Studio - Brandsite",
+    },
+    text: {
+      sv: "Creator Studio är en del av H&M Group – vilket ger dig obegränsad tillgång till dess globala leveranskedja, från produktutveckling till uppfyllelse och logistik. Att arbeta med Creator Studio innebär att utnyttja över 75 års erfarenhet av modeinnovation och en försörjningskedja som är optimerad för att leverera högkvalitativa produkter hållbart och ansvarsfullt. Creator Studio Brandsite är utgångspunkten för alla Creator Studios-tjänster.\nEmil var viktig när han utvecklade Creator Studio-webbplatsens arkitektur och design. Han använde modern teknik som Next.js, TypeScript och Sanity för att säkerställa optimal SEO och CMS.\nEmils bidrag bidrog till att förbättra upplevelsen för Creator Studios kunder, driva mer trafik till plattformen och öka försäljningen och intäkterna. Hans expertis inom frontend-utveckling och användning av modern teknik hjälpte till att skapa en webbplats som fick 100/100 på Lighthouse.",
+      en: "Creator Studio is part of H&M Group – giving you unrestricted access to its global supply chain, from product development to fulfilment and logistics. Working with Creator Studio means tapping into over 75 years of experience in fashion innovation, and a supply chain optimised to deliver high-quality products sustainably and responsibly. The Creator Studio Brandsite is the starting point of all Creator Studios services.\nEmil was important when developing the Creator Studio Site’s architecture and design. He utilised modern technologies such as Next.js, TypeScript and Sanity to ensure optimal SEO and CMS.\nEmil's contributions helped improve the experience for Creator Studio's customers, driving more traffic to the platform and increasing sales and revenue. His expertise in frontend development and use of modern technologies helped create a site scoring 100/100 on Lighthouse.",
+    },
+    slug: "creator-studio-site",
+    category: Category.Work,
+    images: [
+      "/images/creator-studio-site-1.png",
+      "/images/creator-studio-site-2.png",
+      "/images/creator-studio-site-3.png",
+    ],
+    links: [
+      {
+        url: "https://creatorstudio.com",
+        label: {
+          sv: "Besök creatorstudio.com",
+          en: "Visit creatorstudio.com",
+        },
+      },
+    ],
+  },
+  {
+    id: 14,
+    title: {
+      sv: "Creator Studio - True Blanks",
+      en: "Creator Studio - True Blanks",
+    },
+    text: {
+      sv: "Creator Studio är en del av H&M Group – vilket ger dig obegränsad tillgång till dess globala leveranskedja, från produktutveckling till uppfyllelse och logistik. Att arbeta med Creator Studio innebär att utnyttja över 75 års erfarenhet av modeinnovation och en leveranskedja som är optimerad för att leverera högkvalitativa produkter på ett hållbart och ansvarsfullt sätt. True Blanks är mer än bara stora blanks. Varumärket i sig är skapat för att användas exklusivt med vår fullservice plattform för print on demand-varor, Creator Studio.\nEmil spelade en viktig roll när han utvecklade True Blanks sidans arkitektur och design. Han använde moderna teknologier som med Next.js, TypeScript och Sanity för att säkerställa optimal SEO och CMS.\nEmils bidrag bidrog till att förbättra upplevelsen för både Creator Studios kunder och anställda, driva mer trafik till plattformen och öka försäljningen och intäkterna. Hans expertis inom frontend-utveckling och användning av modern teknik hjälpte till att skapa en webbplats som fick 100/100 på Lighthouse.",
+      en: "Creator Studio is part of H&M Group – giving you unrestricted access to its global supply chain, from product development to fulfilment and logistics. Working with Creator Studio means tapping into over 75 years of experience in fashion innovation, and a supply chain that is optimised to deliver high-quality products sustainably and responsibly. True Blanks are more than just great blanks. The brand itself is created to be used exclusively with our full-service print on demand merchandise platform, Creator Studio.\nEmil played an important part when developing the the True Blanks website's architecture and design. He utilised modern technologies such as with Next.js, TypeScript and Sanity to ensure optimal SEO and CMS.\nEmil's contributions helped improve the experience for both Creator Studio's customers and employees, driving more traffic to the platform and increasing sales and revenue. His expertise in frontend development and use of modern technologies helped create a site scoring 100/100 on Lighthouse.",
+    },
+    slug: "true-blanks",
+    category: Category.Work,
+    images: [
+      "/images/true-blanks-1.png",
+      "/images/true-blanks-2.png",
+      "/images/true-blanks-3.png",
+    ],
+    links: [
+      {
+        url: "https://creatorstudio.com",
+        label: {
+          sv: "Besök creatorstudio.com",
+          en: "Visit creatorstudio.com",
+        },
+      },
+      {
+        url: "https://trueblanks.com",
+        label: {
+          sv: "Besök trueblanks.com",
+          en: "Visit trueblanks.com",
+        },
+      },
+    ],
+  },
+  {
+    id: 15,
+    title: {
+      sv: "Creator Studio - My Studio",
+      en: "Creator Studio - My Studio",
+    },
+    text: {
+      sv: "Creator Studio är en print-on-demand-varuplattform som hanterar produktion, uppfyllelse och e-handel. Som en del av H&M-gruppen har Creator Studio tillgång till en global leveranskedja för hållbar och ansvarsfull produktleverans.\n Emil spelade en viktig roll i att utveckla plattformens arkitektur för väsentlig funktionalitet. Han använde tekniker som Next.js, Sentry, TypeScript, Datadog, Docker och Terraform för att säkerställa robusthet, skalbarhet och effektivitet. Emil arbetade nära Creator Studio-teamet för att möta kraven från deras växande kundbas.\n Emils bidrag hjälpte till att förbättra upplevelsen för Creator Studios kunder, driva mer trafik till plattformen och öka försäljningen och intäkterna. Dessutom introducerade Emil TypeScript för sitt team och integrerade det i plattformen, vilket förbättrade utvecklingsprocessen med typsäkerhet och förbättrad kodkvalitet. Hans expertis inom frontend-utveckling och användning av modern teknik hjälpte till att skapa en stark och effektiv plattform, som gjorde det möjligt för kreatörer att fokusera på att designa produkter och utöka sin publik.",
+      en: "Creator Studio is a print-on-demand merchandise platform that handles production, fulfillment, and e-commerce. As part of the H&M Group, Creator Studio has access to a global supply chain for sustainable and responsible product delivery.\n Emil played an important role in developing the platform's architecture for essential functionality. He utilized technologies such as Next.js, Sentry, TypeScript, Datadog, Docker, and Terraform to ensure robustness, scalability, and efficiency. Emil worked closely with the Creator Studio team to meet the demands of their growing customer base.\n Emil's contributions helped improve the experience for Creator Studio's customers, driving more traffic to the platform and increasing sales and revenue. Additionally, Emil introduced TypeScript to his team and integrated it into the platform, enhancing the development process with type safety and improved code quality. His expertise in frontend development and use of modern technologies helped create a strong and efficient platform, allowing creators to focus on designing products and growing their audience.",
+    },
+    slug: "my-studio",
+    category: Category.Work,
+    images: [
+      "/images/my-studio-1.png",
+      "/images/my-studio-2.png",
+      "/images/my-studio-3.png",
+      "/images/my-studio-4.png",
+    ],
+    links: [
+      {
+        url: "https://creatorstudio.com",
+        label: {
+          sv: "Besök creatorstudio.com",
+          en: "Visit creatorstudio.com",
+        },
+      },
+      {
+        url: "https://mystudio.creatorstudio.com",
+        label: {
+          sv: "Besök mystudio.creatorstudio.com",
+          en: "Visit mystudio.creatorstudio.com",
+        },
+      },
+    ],
+  },
 ];
