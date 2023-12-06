@@ -5,4 +5,5 @@ WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn install --production --ignore-scripts --prefer-offline
 COPY index.js ./
+USER 1000
 CMD ["yarn", "start"]
