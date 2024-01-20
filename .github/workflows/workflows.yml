@@ -74,7 +74,7 @@ jobs:
   trigger-infra:
     runs-on: ubuntu-latest
     name: Trigger infra pipeline
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     needs:
       - server
       - client
