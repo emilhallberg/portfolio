@@ -444,4 +444,35 @@ export const projects: ProjectProps[] = [
       },
     ],
   },
+  {
+    id: 16,
+    title: {
+      sv: "Mohlén Publishing",
+      en: "Mohlén Publishing",
+    },
+    text: {
+      sv: "I samarbete med Mohlén Publishing har vi nyligen lanserat en modern och användarvänlig hemsida, med fokus på att förbättra användarupplevelsen och göra det enklare för besökare att upptäcka och köpa böcker. Hemsidan är byggd med Next.js, en kraftfull ramverk för React som möjliggör server-rendering och dynamisk generering av innehåll. För att ge sidan en stilren och responsiv design används Tailwind CSS, ett verktyg som erbjuder en mängd fördefinierade klasser för snabb och effektiv styling.",
+      en: "In collaboration with Mohlén Publishing, we have recently launched a modern and user-friendly website, focusing on enhancing the user experience and making it easier for visitors to discover and purchase books. The website is built with Next.js, a powerful framework for React that enables server-side rendering and dynamic content generation. To provide a sleek and responsive design, Tailwind CSS is used, a tool that offers a wide range of predefined classes for quick and efficient styling.",
+    },
+    slug: "mohlen-publishing",
+    category: Category.Project,
+    images: [
+      "/images/mohlen-publishing-1.png",
+      "/images/mohlen-publishing-2.png",
+      "/images/mohlen-publishing-3.png",
+    ],
+    links: [
+      {
+        url: "https://mohlenpublishing.com",
+        label: {
+          sv: "Besök mohlenpublishing.com",
+          en: "Visit mohlenpublishing.com",
+        },
+      },
+      {
+        url: "https://github.com/emilhallberg/mohlen-publishing",
+        label: { sv: "Se källkod på GitHub", en: "View source code on GitHub" },
+      },
+    ],
+  },
 ];
