@@ -68,11 +68,11 @@ const Input: React.FC<InputProps> = ({
   type,
   label,
   name,
-  value,
+  value = "",
   onChange,
-  required,
-  minLength,
-  maxLength,
+  required = false,
+  minLength = 0,
+  maxLength = 255,
 }: InputProps) => {
   const [isEmpty, setIsEmpty] = useState(!value);
   return (
@@ -91,13 +91,6 @@ const Input: React.FC<InputProps> = ({
       />
     </SContainer>
   );
-};
-
-Input.defaultProps = {
-  value: "",
-  required: false,
-  minLength: 0,
-  maxLength: 255,
 };
 
 export default Input;

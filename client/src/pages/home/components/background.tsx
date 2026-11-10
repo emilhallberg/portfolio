@@ -28,7 +28,7 @@ const Background: FC = () => {
   return (
     <SBackground
       active={active}
-      style={{ backgroundImage: "url('/images/home.png')" }}
+      style={{ backgroundImage: "url('/images/emil-japan.jpeg')" }}
     />
   );
 };

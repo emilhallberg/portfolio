@@ -79,11 +79,11 @@ interface TextareaProps {
 const Textarea: React.FC<TextareaProps> = ({
   label,
   name,
-  value,
+  value = "",
   onChange,
-  required,
-  minLength,
-  maxLength,
+  required = false,
+  minLength = 0,
+  maxLength = 255,
 }: TextareaProps) => {
   const [isEmpty, setIsEmpty] = useState(!value);
   return (
@@ -105,13 +105,6 @@ const Textarea: React.FC<TextareaProps> = ({
       </SCounter>
     </SContainer>
   );
-};
-
-Textarea.defaultProps = {
-  value: "",
-  required: false,
-  minLength: 0,
-  maxLength: 255,
 };
 
 export default Textarea;

@@ -68,7 +68,7 @@ interface Props {
   className?: string;
 }
 
-const Hamburger: React.FC<Props> = ({ isOpen, className }: Props) => {
+const Hamburger: React.FC<Props> = ({ isOpen, className = "" }: Props) => {
   const { open } = useContext(MenuContext);
   return (
     <SHamburger onClick={isOpen} className={className}>
@@ -78,10 +78,6 @@ const Hamburger: React.FC<Props> = ({ isOpen, className }: Props) => {
       <SLine open={open} />
     </SHamburger>
   );
-};
-
-Hamburger.defaultProps = {
-  className: "",
 };
 
 export default Hamburger;

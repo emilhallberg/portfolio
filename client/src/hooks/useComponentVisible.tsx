@@ -8,7 +8,7 @@ import {
 } from "react";
 
 interface UseComponentVisible {
-  ref: RefObject<HTMLDivElement>;
+  ref: RefObject<HTMLDivElement | null>;
   visible: boolean;
   isVisible: Dispatch<SetStateAction<boolean>>;
 }

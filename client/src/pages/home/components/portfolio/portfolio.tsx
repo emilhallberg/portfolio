@@ -34,8 +34,8 @@ const Portfolio: FC = () => {
     <SSection>
       <SProjects>
         {projects
-          .map(({ id, title, category, images, slug }) => (
-            <Project key={id} to={`${portfolio.path}/${slug}`}>
+          .map(({ title, category, images, slug }) => (
+            <Project key={slug} to={`${portfolio.path}/${slug}`}>
               <Project.Image arr={images} />
               <Project.Category>{category[lang]}</Project.Category>
               <Project.Title>{title[lang]}</Project.Title>

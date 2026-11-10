@@ -56,7 +56,10 @@ export interface ButtonProps {
   className?: string;
 }
 
-const Button: React.FC<ButtonProps> = ({ label, className }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({
+  label,
+  className = "",
+}: ButtonProps) => {
   const [height, setHeight] = useState(0);
   const [width, setWidth] = useState(0);
   const [dx, setDx] = useState(1);
@@ -97,7 +100,5 @@ const Button: React.FC<ButtonProps> = ({ label, className }: ButtonProps) => {
     </SContainer>
   );
 };
-
-Button.defaultProps = { className: "" };
 
 export default Button;

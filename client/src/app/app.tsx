@@ -15,7 +15,9 @@ const SApp = styled.div`
 `;
 
 const App: React.FC = () => (
-  <BrowserRouter>
+  <BrowserRouter
+    future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+  >
     <SApp>
       <Header />
       <Main />

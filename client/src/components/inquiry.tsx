@@ -11,7 +11,7 @@ import media from "../resources/stylesheets/media";
 import { phone } from "../resources/stylesheets/dimensions";
 import useWhenInView from "../hooks/useWhenInView";
 
-const url = process.env.REACT_APP_CONTACT_API_URL || "/api";
+const url = import.meta.env.VITE_CONTACT_API_URL || "/api";
 
 const SInquiry = styled.div<AnimationProps>`
   ${slideUp};

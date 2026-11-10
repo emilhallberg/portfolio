@@ -12,14 +12,19 @@ interface SubmitProps {
   disabled?: boolean;
 }
 
-const Submit: FC<SubmitProps> = ({ children, className, disabled }: SubmitProps) => (
-  <SContainer type="submit" className={className} disabled={disabled} tabIndex={0}>
+const Submit: FC<SubmitProps> = ({
+  children,
+  className = "",
+  disabled,
+}: SubmitProps) => (
+  <SContainer
+    type="submit"
+    className={className}
+    disabled={disabled}
+    tabIndex={0}
+  >
     {children}
   </SContainer>
 );
-
-Submit.defaultProps = {
-  className: "",
-};
 
 export default Submit;

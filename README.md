@@ -1,6 +1,6 @@
 # Portfolio
 
-React frontend and contact API in `client/`, deployed on Vercel at
+React 19 frontend (Vite + TypeScript) and contact API in `client/`, deployed on Vercel at
 [hallbergemil.com](https://hallbergemil.com).
 
 ## Vercel deployment
@@ -14,7 +14,7 @@ Project settings:
 | Setting | Value |
 | --- | --- |
 | Root directory | `client` |
-| Framework | Create React App |
+| Framework | Vite |
 | Install command | `yarn install --frozen-lockfile` |
 | Build command | `yarn build` |
 | Output directory | `build` |
@@ -47,7 +47,7 @@ Production before deploying. See `client/.env.example` for placeholders:
 - `EMAIL_FROM`: optional sender address; defaults to `EMAIL_USERNAME`.
 - `EMAIL_TO`: destination inbox.
 
-Never prefix credentials with `REACT_APP_` or commit real values. SMTP must
+Never prefix credentials with `VITE_` or commit real values. SMTP must
 accept connections from Vercel. The function requires TLS and uses
 the visitor's email as Reply-To. The sender defaults to the authenticated
 address, or uses `EMAIL_FROM` when the provider permits that sender.
@@ -95,6 +95,7 @@ From `client/`:
 ```sh
 yarn install --frozen-lockfile
 yarn test:api
+yarn typecheck
 yarn lint
 yarn build
 ```
@@ -103,12 +104,14 @@ For the full app including `/api/email`, copy `.env.example` to `.env.local`,
 fill in your iCloud SMTP settings, and run `npx vercel dev` from `client/`.
 Link to the `portfolio` project in the `emilhallbergs-projects` team when prompted.
 Both the frontend and function use the same local origin; no separate Express
-server is needed. `yarn start` runs only the frontend.
+server is needed. `yarn start` runs only the frontend at http://localhost:3005.
+An optional `VITE_CONTACT_API_URL` changes the frontend API base URL; only public
+configuration belongs in `VITE_` variables. SMTP settings stay server-only.
 The API tests mock SMTP and never send real emails.
 
 The former Docker/GHCR/Hetzner deployment workflow, Dockerfiles, and Express
 server have been retired. Deployments are handled by Vercel's GitHub integration.
 
-References: [Vercel CRA](https://vercel.com/docs/frameworks/frontend/create-react-app),
+References: [Vercel Vite](https://vercel.com/docs/frameworks/frontend/vite),
 [Node functions](https://vercel.com/docs/functions/runtimes/node-js),
 [custom domains](https://vercel.com/docs/domains/working-with-domains/add-a-domain).
