@@ -182,3 +182,26 @@ test("authenticates with iCloud while sending from the custom domain", async () 
   assert.equal(message.to, "emil@hallbergemil.com");
   assert.equal(message.replyTo, body.from);
 });
+
+test("logs only safe SMTP error codes without exposing credentials or responses", async (t) => {
+  configure();
+  const log = t.mock.method(console, "error", () => {});
+  nodemailer.createTransport = () => ({
+    async sendMail() {
+      throw Object.assign(new Error("Private SMTP response and credentials"), {
+        code: "EAUTH",
+        responseCode: 535,
+        response: "Private SMTP response",
+      });
+    },
+    close() {},
+  });
+  const res = response();
+  await email({ method: "POST", body }, res);
+  assert.deepEqual(log.mock.calls[0].arguments, [
+    "Contact email delivery failed",
+    { code: "EAUTH", responseCode: 535 },
+  ]);
+  assert.equal(res.statusCode, 502);
+  assert.deepEqual(res.body, { status: false });
+});

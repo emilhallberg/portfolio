@@ -75,9 +75,17 @@ module.exports = async function email(req, res) {
       throw new Error("Recipient was not accepted");
     }
     return res.status(200).json({ status: true });
-  } catch {
+  } catch (error) {
     // Do not log message contents, addresses, credentials, or SMTP responses.
-    console.error("Contact email delivery failed");
+    console.error("Contact email delivery failed", {
+      code:
+        typeof error?.code === "string" && /^[A-Z0-9_]{1,32}$/.test(error.code)
+          ? error.code
+          : "UNKNOWN",
+      responseCode: Number.isInteger(error?.responseCode)
+        ? error.responseCode
+        : undefined,
+    });
     return res.status(502).json({ status: false });
   } finally {
     transport.close();
