@@ -9,6 +9,7 @@ const {
   EMAIL_HOST,
   EMAIL_PORT,
   EMAIL_TO,
+  EMAIL_FROM,
   EMAIL_USERNAME,
   EMAIL_PASSWORD,
   NODE_ENV,
@@ -42,7 +43,7 @@ app.post('/email', async (req, res) => {
 
   try {
     const result = await transport.sendMail({
-      from: EMAIL_USERNAME,
+      from: EMAIL_FROM || EMAIL_USERNAME,
       to: EMAIL_TO,
       replyTo: req.body.from,
       subject: `[hallbergemil.com] ${req.body.name} (${req.body.from}): ${req.body.subject}`,

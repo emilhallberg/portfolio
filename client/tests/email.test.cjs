@@ -39,6 +39,7 @@ function configure() {
     EMAIL_PORT: "587",
     EMAIL_USERNAME: "sender@example.com",
     EMAIL_PASSWORD: "test-only",
+    EMAIL_FROM: "",
     EMAIL_TO: "owner@example.com",
   });
 }
@@ -149,4 +150,35 @@ test("SMTP failures and rejected recipients return failure and close the transpo
     assert.deepEqual(res.body, { status: false });
     assert.equal(closed, true);
   }
+});
+
+test("authenticates with iCloud while sending from the custom domain", async () => {
+  configure();
+  Object.assign(process.env, {
+    EMAIL_HOST: "smtp.mail.me.com",
+    EMAIL_USERNAME: "owner@icloud.com",
+    EMAIL_FROM: "emil@hallbergemil.com",
+    EMAIL_TO: "emil@hallbergemil.com",
+  });
+  let message;
+  nodemailer.createTransport = (options) => {
+    assert.equal(options.host, "smtp.mail.me.com");
+    assert.equal(options.port, 587);
+    assert.equal(options.secure, false);
+    assert.equal(options.requireTLS, true);
+    assert.equal(options.auth.user, "owner@icloud.com");
+    return {
+      async sendMail(value) {
+        message = value;
+        return { accepted: ["emil@hallbergemil.com"] };
+      },
+      close() {},
+    };
+  };
+  const res = response();
+  await email({ method: "POST", body }, res);
+  assert.equal(res.statusCode, 200);
+  assert.equal(message.from, "emil@hallbergemil.com");
+  assert.equal(message.to, "emil@hallbergemil.com");
+  assert.equal(message.replyTo, body.from);
 });

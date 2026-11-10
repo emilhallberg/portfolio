@@ -30,8 +30,14 @@ module.exports = async function email(req, res) {
     return res.status(400).json({ status: false });
   }
 
-  const { EMAIL_HOST, EMAIL_PORT, EMAIL_USERNAME, EMAIL_PASSWORD, EMAIL_TO } =
-    process.env;
+  const {
+    EMAIL_HOST,
+    EMAIL_PORT,
+    EMAIL_USERNAME,
+    EMAIL_PASSWORD,
+    EMAIL_FROM,
+    EMAIL_TO,
+  } = process.env;
   const port = Number(EMAIL_PORT);
   if (
     !EMAIL_HOST ||
@@ -59,7 +65,7 @@ module.exports = async function email(req, res) {
 
   try {
     const result = await transport.sendMail({
-      from: EMAIL_USERNAME,
+      from: EMAIL_FROM || EMAIL_USERNAME,
       to: EMAIL_TO,
       replyTo: from,
       subject: `[hallbergemil.com] ${body.name.trim()} (${from}): ${body.subject.trim()}`,

@@ -30,12 +30,14 @@ Production before deploying. See `client/.env.example` for placeholders:
 - `EMAIL_PORT`: normally 587 (STARTTLS) or 465 (implicit TLS).
 - `EMAIL_USERNAME`: SMTP username, also used as the sender address.
 - `EMAIL_PASSWORD`: SMTP password.
+- `EMAIL_FROM`: optional sender address; defaults to `EMAIL_USERNAME`.
 - `EMAIL_TO`: destination inbox.
 
 Never prefix credentials with `REACT_APP_` or commit real values. SMTP must
 accept connections from Vercel, without depending on a private Hetzner network
 or an allowlist limited to the old server. The function requires TLS and uses
-the visitor's email as Reply-To, keeping the authenticated sender unchanged.
+the visitor's email as Reply-To. The sender defaults to the authenticated
+address, or uses `EMAIL_FROM` when the provider permits that sender.
 A successful response means SMTP accepted the recipient, not confirmed inbox
 delivery. Verify receipt and replies in the destination inbox.
 
@@ -43,6 +45,35 @@ The form preserves input on failure and prevents duplicate submissions while
 sending. The endpoint validates required fields and lengths. It has no durable
 application rate limiter or CAPTCHA; use Vercel firewall rate limiting or add
 bot protection if spam becomes an issue.
+
+### iCloud Mail with the custom domain
+
+For `emil@hallbergemil.com` hosted on iCloud Mail, set these variables for
+Preview and Production in Vercel:
+
+| Variable | Value |
+| --- | --- |
+| `EMAIL_HOST` | `smtp.mail.me.com` |
+| `EMAIL_PORT` | `587` (STARTTLS) |
+| `EMAIL_USERNAME` | The full iCloud Mail address of the account owning the custom address |
+| `EMAIL_PASSWORD` | An Apple app-specific password, stored as Sensitive |
+| `EMAIL_FROM` | `emil@hallbergemil.com` |
+| `EMAIL_TO` | `emil@hallbergemil.com` |
+
+Verify that you can send from the custom address in iCloud Mail first.
+At [account.apple.com](https://account.apple.com/), open Sign-In and Security
+then App-Specific Passwords, and generate one named `Portfolio Vercel`.
+This requires two-factor authentication on your Apple Account. Paste the
+generated password directly into Vercel, then redeploy and test the form.
+The full iCloud Mail address used for SMTP login can differ from your
+custom-domain sender and from the email used to sign in to your Apple Account.
+
+Keep the existing iCloud MX, SPF, DKIM and other mail DNS records when later
+moving the website's DNS to Vercel.
+
+Apple references: [SMTP settings](https://support.apple.com/en-us/102525),
+[app-specific passwords](https://support.apple.com/en-us/102654),
+[custom domains](https://support.apple.com/en-us/102540).
 
 ### Local development and checks
 
