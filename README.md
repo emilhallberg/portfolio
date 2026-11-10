@@ -1,10 +1,15 @@
 # Portfolio
 
-React frontend in `client/`, with an existing Express SMTP server in `server/`.
+React frontend and contact API in `client/`, deployed on Vercel at
+[hallbergemil.com](https://hallbergemil.com).
 
 ## Vercel deployment
 
-Import `emilhallberg/portfolio` into the intended Vercel account/team:
+Vercel is connected to `emilhallberg/portfolio`. Pushes to `main` automatically
+build and deploy the production site; pull requests get preview deployments.
+The GitHub Actions workflow runs API tests, lint, and a production build.
+
+Project settings:
 
 | Setting | Value |
 | --- | --- |
@@ -18,8 +23,8 @@ Import `emilhallberg/portfolio` into the intended Vercel account/team:
 
 `client/vercel.json` configures the build and direct navigation to `/contact`
 and `/portfolio/...`. Static files and `/api/email` retain their own routes.
-`client/api/email.js` runs as a Node function; Docker and the Express server
-are not needed for Vercel.
+`client/api/email.js` runs as a Node function. `www.hallbergemil.com` redirects
+to the root domain, and Vercel manages HTTPS for both hostnames.
 
 ### Contact email
 
@@ -34,8 +39,7 @@ Production before deploying. See `client/.env.example` for placeholders:
 - `EMAIL_TO`: destination inbox.
 
 Never prefix credentials with `REACT_APP_` or commit real values. SMTP must
-accept connections from Vercel, without depending on a private Hetzner network
-or an allowlist limited to the old server. The function requires TLS and uses
+accept connections from Vercel. The function requires TLS and uses
 the visitor's email as Reply-To. The sender defaults to the authenticated
 address, or uses `EMAIL_FROM` when the provider permits that sender.
 A successful response means SMTP accepted the recipient, not confirmed inbox
@@ -68,8 +72,8 @@ generated password directly into Vercel, then redeploy and test the form.
 The full iCloud Mail address used for SMTP login can differ from your
 custom-domain sender and from the email used to sign in to your Apple Account.
 
-Keep the existing iCloud MX, SPF, DKIM and other mail DNS records when later
-moving the website's DNS to Vercel.
+Website DNS is managed in GoDaddy and points to Vercel. Keep the existing
+iCloud MX, SPF, DKIM, and Apple verification records intact when updating DNS.
 
 Apple references: [SMTP settings](https://support.apple.com/en-us/102525),
 [app-specific passwords](https://support.apple.com/en-us/102654),
@@ -86,33 +90,15 @@ yarn lint
 yarn build
 ```
 
-For the existing setup, `yarn start` calls `http://localhost:4000/email`;
-run the Express server separately with its SMTP environment variables set.
-For Vercel's function locally, copy `.env.example` to `.env.local`, fill in
-SMTP settings, uncomment `REACT_APP_CONTACT_API_URL=/api`, and run
-`npx vercel dev` from `client/`. Link to the same Vercel project when prompted.
+For the full app including `/api/email`, copy `.env.example` to `.env.local`,
+fill in your iCloud SMTP settings, and run `npx vercel dev` from `client/`.
+Link to the `portfolio` project in the `emilhallbergs-projects` team when prompted.
+Both the frontend and function use the same local origin; no separate Express
+server is needed. `yarn start` runs only the frontend.
 The API tests mock SMTP and never send real emails.
 
-### Verify before switching DNS
-
-1. Deploy to a Vercel URL while the existing domain still points to Hetzner.
-2. Check the homepage, `/contact`, a real `/portfolio/<slug>` URL opened
-   directly and refreshed, images, both languages, and mobile layout.
-3. Send a real contact message, verify inbox receipt and Reply-To. Check that
-   an SMTP failure shows an error and preserves the entered message. Restore
-   valid settings and redeploy after any deliberate failure test.
-4. Add the existing domain and `www` to Vercel, choose the preferred hostname,
-   then update only the website DNS records to the values Vercel provides.
-   Preserve mail records (MX, SPF, DKIM, DMARC) and unrelated services.
-5. Verify HTTPS, hostname redirects, direct routes, and contact email on the
-   custom domain. Keep Hetzner available during DNS propagation and rollback.
-6. Only after verification, retire the portfolio's old Docker deployment and
-   GitHub Actions workflow. Check for other sites or mail services before
-   cancelling any Hetzner server.
-
-The existing `.github/workflows/workflows.yml`, Dockerfiles, and Express
-service remain active. Pushing to `main` still triggers the Hetzner deployment.
-No DNS or hosting changes are made by this repository preparation.
+The former Docker/GHCR/Hetzner deployment workflow, Dockerfiles, and Express
+server have been retired. Deployments are handled by Vercel's GitHub integration.
 
 References: [Vercel CRA](https://vercel.com/docs/frameworks/frontend/create-react-app),
 [Node functions](https://vercel.com/docs/functions/runtimes/node-js),
