@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "create-react-app",
+  "buildCommand": "yarn build",
+  "outputDirectory": "build",
+  "functions": {
+    "api/email.js": { "maxDuration": 60 }
+  },
+  "rewrites": [
+    { "source": "/contact", "destination": "/index.html" },
+    { "source": "/portfolio/:path*", "destination": "/index.html" }
+  ]
+}

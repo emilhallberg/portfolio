@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Form from "./form/form";
@@ -12,7 +12,8 @@ import { phone } from "../resources/stylesheets/dimensions";
 import useWhenInView from "../hooks/useWhenInView";
 
 const url =
-  process.env.NODE_ENV === "development" ? "http://localhost:4000" : "/api";
+  process.env.REACT_APP_CONTACT_API_URL ||
+  (process.env.NODE_ENV === "development" ? "http://localhost:4000" : "/api");
 
 const SInquiry = styled.div<AnimationProps>`
   ${slideUp};
@@ -39,25 +40,47 @@ const Inquiry: React.FC = () => {
   const { values, handleChange, clearForm } = useForm({});
   const { t } = useTranslation("contact");
   const [active, isActive] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState(false);
+  const submitting = useRef(false);
   const { ref, visible } = useWhenInView(150);
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
     e.preventDefault();
-    await fetch(`${url}/email`, {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        from: values.from,
-        name: values.name,
-        subject: values.subject,
-        text: values.text,
-      }),
-    });
-    isActive(false);
-    clearForm();
+    if (submitting.current) return;
+    submitting.current = true;
+    setSending(true);
+    setError(false);
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 65000);
+    try {
+      const response = await fetch(`${url}/email`, {
+        method: "POST",
+        signal: controller.signal,
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          from: values.from,
+          name: values.name,
+          subject: values.subject,
+          text: values.text,
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || result.status !== true) {
+        throw new Error("Email submission failed");
+      }
+      isActive(false);
+      clearForm();
+    } catch {
+      setError(true);
+    } finally {
+      window.clearTimeout(timeout);
+      submitting.current = false;
+      setSending(false);
+    }
   };
 
   return (
@@ -75,6 +98,7 @@ const Inquiry: React.FC = () => {
           type="email"
           label={t("email")}
           name="from"
+          maxLength={254}
           value={values.from}
           onChange={handleChange}
           required
@@ -92,9 +116,14 @@ const Inquiry: React.FC = () => {
           name="text"
           value={values.text}
           onChange={handleChange}
+          required
+          maxLength={5000}
         />
-        <Form.Submit>
-          <Button label={t("send")} />
+        {error && <p role="alert">{t("error")}</p>}
+        <Form.Submit disabled={sending}>
+          <span aria-live="polite">
+            <Button label={t(sending ? "sending" : "send")} />
+          </span>
         </Form.Submit>
       </Form>
       <SSection active={!active}>

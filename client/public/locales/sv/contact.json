@@ -10,5 +10,7 @@
     "title": "Tack för ditt meddelande!",
     "text": "Jag hör av mig så fort som möjligt.",
     "again": "Skicka ett nytt meddelande"
-  }
+  },
+  "sending": "Skickar…",
+  "error": "Ditt meddelande kunde inte skickas. Försök igen."
 }

@@ -10,5 +10,7 @@
     "title": "Thank you for your message!",
     "text": "I'll get back to you as soon as possible.",
     "again": "Send a new message"
-  }
+  },
+  "sending": "Sending…",
+  "error": "Your message could not be sent. Please try again."
 }

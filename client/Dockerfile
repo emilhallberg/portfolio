@@ -1,5 +1,5 @@
 # Stage 0 - Building
-FROM node:21.4.0-alpine3.18 as build-stage
+FROM node:22-alpine as build-stage
 WORKDIR /app
 COPY package.json yarn.lock ./
 RUN yarn
@@ -9,7 +9,7 @@ COPY src ./src
 RUN yarn build
 
 # Stage 1 - Linting and formatting
-FROM node:21.4.0-alpine3.18 as test-stage
+FROM node:22-alpine as test-stage
 WORKDIR /app
 COPY --from=build-stage /app/ ./
 RUN ["yarn", "lint"]
