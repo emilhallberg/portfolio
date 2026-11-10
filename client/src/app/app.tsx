@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import styled from "styled-components";
+import { Analytics } from "@vercel/analytics/react";
 import Header from "./components/header/header";
 import Main from "./components/main/main";
 import Footer from "./components/footer/footer";
@@ -21,6 +22,7 @@ const App: React.FC = () => (
       <Footer />
       <ScrollRestoration />
       <Global />
+      <Analytics />
     </SApp>
   </BrowserRouter>
 );

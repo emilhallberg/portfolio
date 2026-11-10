@@ -26,6 +26,15 @@ and `/portfolio/...`. Static files and `/api/email` retain their own routes.
 `client/api/email.js` runs as a Node function. `www.hallbergemil.com` redirects
 to the root domain, and Vercel manages HTTPS for both hostnames.
 
+### Page views
+
+Vercel Web Analytics is enabled for the project. The React app mounts
+`@vercel/analytics` once to track page views, including client-side navigation.
+View visitors and popular pages in the
+[portfolio Analytics dashboard](https://vercel.com/emilhallbergs-projects/portfolio/analytics).
+Tracking starts with the deployment that adds the integration; historical
+visits are not backfilled. Local development uses the SDK's development mode.
+
 ### Contact email
 
 Add these **server-only** environment variables in Vercel for Preview and
