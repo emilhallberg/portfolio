@@ -10,10 +10,10 @@ const SForm = styled.form`
   grid-area: form;
   display: grid;
   grid-auto-rows: max-content;
-  grid-gap: 16px;
-  justify-items: center;
+  grid-gap: 24px;
+  justify-items: start;
   align-content: center;
-  padding: 32px 0;
+  padding: 0;
 `;
 
 interface FormComp<T> extends FC<T> {
@@ -33,7 +33,18 @@ const Form: FormComp<SectionProps> = ({
   active,
   children,
 }: SectionProps) => (
-  <SForm active={active} onSubmit={onSubmit}>
+  <SForm
+    active={active}
+    noValidate
+    onSubmit={(event) => {
+      if (!event.currentTarget.checkValidity()) {
+        event.preventDefault();
+        event.currentTarget.querySelector<HTMLElement>(":invalid")?.focus();
+        return;
+      }
+      void onSubmit(event);
+    }}
+  >
     {children}
   </SForm>
 );

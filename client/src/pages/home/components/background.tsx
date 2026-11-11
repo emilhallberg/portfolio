@@ -1,12 +1,7 @@
 import { FC } from "react";
 import styled from "styled-components";
-import useAtTopOffset from "../../../hooks/useAtTopOffset";
 
-interface SImageProps {
-  active: boolean;
-}
-
-const SBackground = styled.div<SImageProps>`
+const SBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -19,15 +14,11 @@ const SBackground = styled.div<SImageProps>`
   background-position: center center;
   opacity: 0.5;
   z-index: -1;
-  transition: all 400ms ease-in-out;
-  filter: blur(${({ active }) => (active ? "3px" : 0)});
 `;
 
 const Background: FC = () => {
-  const active = useAtTopOffset(25);
   return (
     <SBackground
-      active={active}
       style={{ backgroundImage: "url('/images/emil-japan.jpeg')" }}
     />
   );

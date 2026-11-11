@@ -3,6 +3,14 @@ import Colors from "./colors";
 import Fonts from "./fonts";
 
 const Global = createGlobalStyle`
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
    body {
     margin: 0;
     background: ${Colors.background};

@@ -1,8 +1,9 @@
-import { FC, ReactNode } from "react";
+import { FC, useState } from "react";
 import styled from "styled-components";
 import media from "../../../resources/stylesheets/media";
-import { phone, tablet } from "../../../resources/stylesheets/dimensions";
 import Slide from "./slide";
+import Viewer from "./viewer";
+import useLanguage from "../../../hooks/useLanguage";
 
 const SSlider = styled.div`
   display: grid;
@@ -10,9 +11,10 @@ const SSlider = styled.div`
   grid-auto-columns: max-content;
   grid-template-rows: max-content;
   grid-gap: 64px;
-  justify-content: center;
+  justify-content: start;
   overflow-x: auto;
-  padding: 5vh 0;
+  padding: 16px max(32px, calc((100% - 65ch) / 2)) 32px;
+  scroll-padding-inline: max(32px, calc((100% - 65ch) / 2));
   scroll-behavior: smooth;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
@@ -21,35 +23,47 @@ const SSlider = styled.div`
   }
   @media (max-width: ${media.tablet}) {
     grid-gap: 32px;
-    padding-left: ${tablet.padding};
-    justify-content: flex-start;
-    &:after {
-      content: "";
-      padding-right: calc(${phone.padding} / 2);
-    }
   }
   @media (max-width: ${media.phone}) {
     grid-gap: 16px;
-    padding-left: ${phone.padding};
-    &:after {
-      content: "";
-      padding-right: calc(${phone.padding} / 2 - 5px);
-    }
+    padding-inline: 16px;
+    scroll-padding-inline: 16px;
   }
 `;
 
-interface SliderComp<T> extends FC<T> {
-  Slide: typeof Slide;
-}
-
 interface SliderProps {
-  children: ReactNode;
+  images: string[];
+  title: string;
 }
 
-const Slider: SliderComp<SliderProps> = ({ children }: SliderProps) => (
-  <SSlider>{children}</SSlider>
-);
-
-Slider.Slide = Slide;
+const Slider: FC<SliderProps> = ({ images, title }) => {
+  const [selected, setSelected] = useState<number | null>(null);
+  const sv = useLanguage() === "sv";
+  return (
+    <>
+      <SSlider>
+        {images.map((src, index) => (
+          <Slide
+            key={src}
+            src={src}
+            alt={title}
+            label={`${sv ? "Förstora bild" : "Enlarge image"} ${
+              index + 1
+            } — ${title}`}
+            onClick={() => setSelected(index)}
+          />
+        ))}
+      </SSlider>
+      {selected !== null && (
+        <Viewer
+          images={images}
+          title={title}
+          initialIndex={selected}
+          onDismiss={() => setSelected(null)}
+        />
+      )}
+    </>
+  );
+};
 
 export default Slider;

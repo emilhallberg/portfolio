@@ -4,7 +4,6 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
   computer,
-  d,
   phone,
   tablet,
 } from "../../../resources/stylesheets/dimensions";
@@ -13,99 +12,131 @@ import media from "../../../resources/stylesheets/media";
 import routes from "../../../routes/routes";
 import Locale from "./components/locale";
 import External from "../../../components/button/external";
-import {
-  AnimationProps,
-  slideUp,
-} from "../../../resources/animations/animations";
-import useWhenInView from "../../../hooks/useWhenInView";
 
-const SColumn = styled.div`
-  display: grid;
-  grid-auto-rows: max-content;
-  grid-gap: 8px;
-`;
-
-const SFooter = styled.footer<AnimationProps>`
+const SFooter = styled.footer`
   grid-area: footer;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 32px;
-  min-height: ${d.footer};
   z-index: 1;
-  background: ${Colors.background} no-repeat center;
-  background-size: cover;
-  padding: 32px ${computer.padding};
-  align-content: center;
-  justify-items: center;
+  background: ${Colors.background};
+  padding: 0 ${computer.padding} 32px;
   @media (max-width: ${media.tablet}) {
-    padding: 32px ${tablet.padding};
+    padding: 0 ${tablet.padding} 24px;
   }
   @media (max-width: ${media.phone}) {
-    padding: 32px ${phone.padding};
-    grid-template-columns: 1fr;
-    grid-auto-rows: 1fr;
-    min-height: auto;
-    justify-items: flex-start;
+    padding: 0 ${phone.padding} 24px;
   }
-  ${SColumn} {
-    ${slideUp};
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 14px;
+    color: #b8b8b8;
+    &:hover {
+      color: white;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    &:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
   }
 `;
-
-const STitle = styled.p`
+const SPrimary = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+  padding-top: 24px;
+  border-top: 1px solid #ffffff24;
+`;
+const SIdentity = styled.p`
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  @media (max-width: ${media.phone}) {
+    flex-basis: 100%;
+  }
+`;
+const SNavigation = styled.nav`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  @media (max-width: ${media.phone}) {
+    flex: 1;
+    gap: 20px;
+  }
+`;
+const SSecondary = styled.div`
   display: grid;
-  opacity: 0.5;
+  gap: 8px;
+  margin-top: 16px;
 `;
-
-const visit = [
-  { label: "Fowlit", path: "https://fowlit.com" },
-  { label: "Iggarna", path: "https://iggarna.com" },
-];
-
+const SLinkGroup = styled.nav`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 24px;
+  font-size: 13px;
+  color: #a3a3a3;
+  > span {
+    min-width: 48px;
+  }
+  @media (max-width: ${media.phone}) {
+    gap: 0 20px;
+    > span {
+      flex-basis: 100%;
+      margin-top: 8px;
+    }
+  }
+`;
 const follow = [
   { label: "LinkedIn", path: "https://www.linkedin.com/in/emilhallberg/" },
-  { label: "GitLab", path: "https://gitlab.com/emilhallberg" },
   { label: "GitHub", path: "https://github.com/emilhallberg" },
   { label: "Instagram", path: "https://www.instagram.com/hallbergemil/" },
 ];
-
+const visit = [
+  { label: "Mohlén Publishing", path: "https://mohlenpublishing.com" },
+  { label: "Suphanan", path: "https://suphanan.com" },
+  { label: "Iggarna", path: "https://iggarna.com" },
+];
 const Footer: FC = () => {
   const { t } = useTranslation();
-  const { ref, visible } = useWhenInView(200);
   return (
-    <SFooter ref={ref} active={visible}>
-      <SColumn>
-        <STitle>{t("footer.navigation")}</STitle>
-        {routes
-          .filter(({ header }) => header)
-          .map(({ key, path }) => (
-            <Link key={key} to={path}>
-              {t(`routes:${key}`)}
-            </Link>
-          ))}
-      </SColumn>
-      <SColumn>
-        <STitle>{t("footer.visit")}</STitle>
-        {visit.map(({ label, path }) => (
-          <External key={label} to={path}>
-            {label}
-          </External>
-        ))}
-      </SColumn>
-      <SColumn>
-        <STitle>{t("footer.follow")}</STitle>
-        {follow.map(({ label, path }) => (
-          <External key={label} to={path}>
-            {label}
-          </External>
-        ))}
-      </SColumn>
-      <SColumn>
-        <STitle>{t("footer.language")}</STitle>
+    <SFooter>
+      <SPrimary>
+        <SIdentity>Emil Hallberg</SIdentity>
+        <SNavigation aria-label={t("footer.navigation")}>
+          {routes
+            .filter(({ header }) => header)
+            .map(({ key, path }) => (
+              <Link key={key} to={path}>
+                {t(`routes:${key}`)}
+              </Link>
+            ))}
+        </SNavigation>
         <Locale />
-      </SColumn>
+      </SPrimary>
+      <SSecondary>
+        <SLinkGroup aria-label={t("footer.follow")}>
+          <span>{t("footer.follow")}</span>
+          {follow.map(({ label, path }) => (
+            <External key={label} to={path}>
+              {label}
+            </External>
+          ))}
+        </SLinkGroup>
+        <SLinkGroup aria-label={t("footer.visit")}>
+          <span>{t("footer.visit")}</span>
+          {visit.map(({ label, path }) => (
+            <External key={label} to={path}>
+              {label}
+            </External>
+          ))}
+        </SLinkGroup>
+      </SSecondary>
     </SFooter>
   );
 };
-
 export default Footer;

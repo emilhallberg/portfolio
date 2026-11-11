@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { hexa } from "../../../../../utils/library";
 import Colors from "../../../../../resources/stylesheets/colors";
-import Fonts from "../../../../../resources/stylesheets/fonts";
 import Link, { LinkProps } from "../../../../../components/button/link";
 import {
   AnimationProps,
@@ -16,11 +15,10 @@ const SProject = styled.div<AnimationProps>`
   display: grid;
   grid-column: auto / span 1;
   grid-row: auto / span 12;
-  grid-template-rows: 2fr max-content 1fr;
+  grid-template-rows: 1fr;
   background-color: ${hexa(Colors.background, 10)};
   border-radius: 8px;
   &:nth-child(3n + 1) {
-    grid-template-rows: 4fr max-content 1fr;
     grid-row: auto / span 15;
   }
   &:nth-child(n + 3) {
@@ -29,7 +27,6 @@ const SProject = styled.div<AnimationProps>`
   @media (max-width: ${media.phone}) {
     &:nth-child(3n + 1) {
       grid-row: auto / span 12;
-      grid-template-rows: 2fr max-content 1fr;
     }
     &:nth-child(n + 2) {
       ${slideUp};
@@ -43,15 +40,10 @@ const SProject = styled.div<AnimationProps>`
 const SLink = styled(Link)`
   display: grid;
   grid-template-columns: 16px 288px 16px;
-  grid-template-rows: 2fr max-content 70px;
-  grid-template-areas: "image image image" ". category ." ". title .";
+  grid-template-rows: minmax(0, 1fr) 86px;
+  grid-template-areas: "image image image" ". title .";
   grid-gap: 0;
-  grid-row: auto / span 10;
   text-align: center;
-  padding-bottom: 16px;
-  &:nth-child(3n + 1) {
-    grid-template-rows: 4fr max-content 70px;
-  }
   &:hover {
     text-decoration: none;
   }
@@ -60,23 +52,13 @@ const SLink = styled(Link)`
   }
 `;
 
-const SCategory = styled.i`
-  grid-area: category;
-  font-size: ${Fonts.Size.smallX};
-  font-weight: ${Fonts.Weight.semiBold};
-  text-transform: uppercase;
-  padding-top: 20px;
-`;
-
 const STitle = styled.h4`
   grid-area: title;
   align-self: center;
-  padding-top: 8px;
 `;
 
 interface ProjectComp<T> extends React.FC<LinkProps> {
   Image: typeof Image;
-  Category: typeof SCategory;
   Title: typeof STitle;
 }
 
@@ -95,7 +77,6 @@ const Project: ProjectComp<ProjectProps> = ({ to, children }: ProjectProps) => {
 };
 
 Project.Image = Image;
-Project.Category = SCategory;
 Project.Title = STitle;
 
 export default Project;

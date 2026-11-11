@@ -1,4 +1,5 @@
-import { Ref, useCallback, useEffect, useRef, useState } from "react";
+import { Ref, useEffect, useRef, useState } from "react";
+import useReducedMotion from "./useReducedMotion";
 
 interface Props {
   ref: Ref<HTMLDivElement>;
@@ -7,26 +8,27 @@ interface Props {
 
 const useWhenInView = (offset: number): Props => {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, isVisible] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    if (ref.current) {
-      isVisible(
-        ref.current.getBoundingClientRect().top <=
-          document.documentElement.clientHeight - offset,
-      );
-    }
-  }, [offset]);
+  const [visible, setVisible] = useState(false);
+  const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    handleScroll();
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
+    const element = ref.current;
+    if (!element || reducedMotion) return;
+    const updateVisibility = () => {
+      setVisible(
+        element.getBoundingClientRect().top <= window.innerHeight - offset,
+      );
     };
-  }, [handleScroll]);
+    updateVisibility();
+    window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
+    return () => {
+      window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
+    };
+  }, [offset, reducedMotion]);
 
-  return { ref, visible };
+  return { ref, visible: visible || reducedMotion };
 };
 
 export default useWhenInView;

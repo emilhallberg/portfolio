@@ -1,56 +1,48 @@
-import React, { ChangeEvent, ChangeEventHandler, useState } from "react";
+import React, { ChangeEventHandler, useId, useState } from "react";
 import styled from "styled-components";
-import Fonts from "../../resources/stylesheets/fonts";
-import Colors from "../../resources/stylesheets/colors";
 
-const SContainer = styled.div`
-  position: relative;
+export const SField = styled.div`
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 50px;
-  border-bottom: 1px solid ${Colors.text};
+  gap: 8px;
   width: 100%;
-`;
-
-const SEnter = styled.input`
-  appearance: none;
-  outline: none;
-  border: none;
-  background: none;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  font-size: ${Fonts.Size.regular};
-  font-weight: ${Fonts.Weight.regular};
-  font-family: ${Fonts.Family.text};
-  z-index: 1;
-  color: ${Colors.text};
-  &:focus {
-    outline: none;
+  min-width: 0;
+  label {
+    color: #e5e5e5;
+    font-size: 0.875rem;
+    line-height: 1.5;
   }
-  &:-webkit-autofill,
-  &:-webkit-autofill:hover,
-  &:-webkit-autofill:focus,
-  &:-webkit-autofill:active {
-    -webkit-transition: color 9999s ease-out, background-color 9999s ease-out;
-    -webkit-transition-delay: 9999s;
+  input,
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 14px 16px;
+    border: 1px solid #ffffff33;
+    border-radius: 10px;
+    background: #1c1c1e;
+    color: white;
+    font: inherit;
+    line-height: 1.5;
+    transition: border-color 150ms ease-out;
+    &:hover {
+      border-color: #ffffff66;
+    }
+    &:focus-visible {
+      outline: 2px solid white;
+      outline-offset: 3px;
+    }
+    &[aria-invalid="true"] {
+      border-color: #ff9696;
+    }
+    &::placeholder {
+      color: #a3a3a3;
+    }
   }
 `;
-
-interface SHeaderProps {
-  active: boolean;
-}
-
-const SHeader = styled.i<SHeaderProps>`
-  position: absolute;
-  top: ${({ active }): string => (active ? "20px" : "0px")};
-  left: 10px;
-  font-size: ${({ active }): string =>
-    active ? Fonts.Size.regular : Fonts.Size.smallX};
-  font-weight: ${Fonts.Weight.regular};
-  font-family: ${Fonts.Family.text};
-  transition: 300ms ease-out;
-  color: ${Colors.text};
+export const SError = styled.p`
+  color: #ffb3b3;
+  font-size: 0.875rem;
+  line-height: 1.5;
 `;
 
 interface InputProps {
@@ -73,24 +65,38 @@ const Input: React.FC<InputProps> = ({
   required = false,
   minLength = 0,
   maxLength = 255,
-}: InputProps) => {
-  const [isEmpty, setIsEmpty] = useState(!value);
+}) => {
+  const id = useId();
+  const [error, setError] = useState("");
   return (
-    <SContainer>
-      <SHeader active={isEmpty}>{label}</SHeader>
-      <SEnter
+    <SField>
+      <label htmlFor={id}>{label}</label>
+      <input
+        id={id}
         type={type}
         name={name}
-        value={value || ""}
-        onChange={onChange as ChangeEventHandler<HTMLInputElement>}
+        value={value}
+        autoComplete={
+          name === "name" ? "name" : type === "email" ? "email" : undefined
+        }
+        placeholder={type === "email" ? "name@example.com" : undefined}
         required={required}
         minLength={minLength}
         maxLength={maxLength}
-        onFocus={(): void => setIsEmpty(false)}
-        onBlur={(e): void => setIsEmpty(!e.target.value)}
+        aria-invalid={Boolean(error)}
+        aria-describedby={error ? `${id}-error` : undefined}
+        onInvalid={(event) => {
+          event.preventDefault();
+          setError(event.currentTarget.validationMessage);
+        }}
+        onBlur={(event) => setError(event.currentTarget.validationMessage)}
+        onChange={(event) => {
+          (onChange as ChangeEventHandler<HTMLInputElement>)(event);
+          if (error) setError(event.currentTarget.validationMessage);
+        }}
       />
-    </SContainer>
+      {error && <SError id={`${id}-error`}>{error}</SError>}
+    </SField>
   );
 };
-
 export default Input;

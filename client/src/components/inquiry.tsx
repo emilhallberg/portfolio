@@ -1,37 +1,46 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import Form from "./form/form";
 import useForm from "../hooks/useForm";
-import Button from "./button/button";
-import Click from "./button/click";
-import Section from "./section";
 import { AnimationProps, slideUp } from "../resources/animations/animations";
-import media from "../resources/stylesheets/media";
-import { phone } from "../resources/stylesheets/dimensions";
 import useWhenInView from "../hooks/useWhenInView";
 
 const url = import.meta.env.VITE_CONTACT_API_URL || "/api";
 
 const SInquiry = styled.div<AnimationProps>`
   ${slideUp};
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: max-content;
-  grid-template-areas: "form";
-
-  @media (max-width: ${media.phone}) {
-    padding: 0 ${phone.padding};
-    grid-template-columns: 1fr;
-    grid-template-areas: "form";
-  }
+  min-width: 0;
 `;
-
-const SSection = styled(Section)`
-  ${slideUp};
-  grid-area: form;
-  height: 300px;
-  padding: 0;
+const SSuccess = styled.div`
+  padding: 24px;
+  border: 1px solid #ffffff33;
+  border-radius: 12px;
+  background: #1c1c1e;
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+  h3:focus {
+    outline: none;
+  }
+  p {
+    color: #b8b8b8;
+    line-height: 1.6;
+    margin: 12px 0 20px;
+  }
+  button {
+    color: white;
+    min-height: 44px;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+  button:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
 `;
 
 const Inquiry: React.FC = () => {
@@ -41,6 +50,10 @@ const Inquiry: React.FC = () => {
   const [sending, setSending] = useState(false);
   const [error, setError] = useState(false);
   const submitting = useRef(false);
+  const successHeading = useRef<HTMLHeadingElement>(null);
+  useEffect(() => {
+    if (!active) successHeading.current?.focus();
+  }, [active]);
   const { ref, visible } = useWhenInView(150);
 
   const handleSubmit = async (e: React.FormEvent): Promise<void> => {
@@ -83,54 +96,57 @@ const Inquiry: React.FC = () => {
 
   return (
     <SInquiry ref={ref} active={visible}>
-      <Form onSubmit={handleSubmit} active={active}>
-        <Form.Input
-          type="text"
-          label={t("name")}
-          name="name"
-          value={values.name}
-          onChange={handleChange}
-          required
-        />
-        <Form.Input
-          type="email"
-          label={t("email")}
-          name="from"
-          maxLength={254}
-          value={values.from}
-          onChange={handleChange}
-          required
-        />
-        <Form.Input
-          type="text"
-          label={t("subject")}
-          name="subject"
-          value={values.subject}
-          onChange={handleChange}
-          required
-        />
-        <Form.Textarea
-          label={t("message")}
-          name="text"
-          value={values.text}
-          onChange={handleChange}
-          required
-          maxLength={5000}
-        />
-        {error && <p role="alert">{t("error")}</p>}
-        <Form.Submit disabled={sending}>
-          <span aria-live="polite">
-            <Button label={t(sending ? "sending" : "send")} />
-          </span>
-        </Form.Submit>
-      </Form>
-      <SSection active={!active}>
-        <Section.Title>{t("thanks.title")}</Section.Title>
-        <Section.Text>{t("thanks.text")}</Section.Text>
-        <Click onAction={() => isActive(true)}>
-          <Button label={t("thanks.again")} />
-        </Click>
-      </SSection>
+      {active ? (
+        <Form onSubmit={handleSubmit} active={true}>
+          <Form.Input
+            type="text"
+            label={t("name")}
+            name="name"
+            value={values.name}
+            onChange={handleChange}
+            required
+          />
+          <Form.Input
+            type="email"
+            label={t("email")}
+            name="from"
+            maxLength={254}
+            value={values.from}
+            onChange={handleChange}
+            required
+          />
+          <Form.Input
+            type="text"
+            label={t("subject")}
+            name="subject"
+            value={values.subject}
+            onChange={handleChange}
+            required
+          />
+          <Form.Textarea
+            label={t("message")}
+            name="text"
+            value={values.text}
+            onChange={handleChange}
+            required
+            maxLength={5000}
+          />
+          {error && <p role="alert">{t("error")}</p>}
+          <Form.Submit disabled={sending}>
+            <span aria-live="polite">{t(sending ? "sending" : "send")}</span>
+          </Form.Submit>
+        </Form>
+      ) : (
+        <SSuccess>
+          <h3 ref={successHeading} tabIndex={-1}>
+            {t("thanks.title")}
+          </h3>
+          <p>{t("thanks.text")}</p>
+          <button type="button" onClick={() => isActive(true)}>
+            {t("thanks.again")}
+          </button>
+        </SSuccess>
+      )}
     </SInquiry>
   );
 };

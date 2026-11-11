@@ -3,7 +3,23 @@ import styled from "styled-components";
 
 const SContainer = styled.button`
   cursor: pointer;
-  outline: none;
+  min-height: 48px;
+  padding: 14px 24px;
+  border-radius: 10px;
+  background: #f5f5f7;
+  color: #111111;
+  font-weight: 600;
+  &:hover:not(:disabled) {
+    background: #dcdce0;
+  }
+  &:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 4px;
+  }
+  &:disabled {
+    opacity: 0.6;
+    cursor: wait;
+  }
 `;
 
 interface SubmitProps {

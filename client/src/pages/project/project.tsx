@@ -2,7 +2,6 @@ import { FC } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router";
 import { projects } from "../../resources/data/data";
-import Section from "../../components/section";
 import useLanguage from "../../hooks/useLanguage";
 import Slider from "./components/slider";
 import Empty from "../../components/empty";
@@ -12,9 +11,41 @@ import { slideUp } from "../../resources/animations/animations";
 import useWhenInView from "../../hooks/useWhenInView";
 import media from "../../resources/stylesheets/media";
 
-const SProject = styled.div`
+const SProject = styled.article`
   display: grid;
   grid-auto-rows: max-content;
+`;
+
+const SIntro = styled.section`
+  box-sizing: border-box;
+  width: min(100% - 64px, 65ch);
+  margin: 0 auto;
+  padding: 48px 0 24px;
+  text-align: left;
+  @media (max-width: ${media.phone}) {
+    width: calc(100% - 32px);
+    padding-top: 32px;
+  }
+`;
+const STitle = styled.h1`
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  overflow-wrap: anywhere;
+  margin-bottom: 20px;
+`;
+const SText = styled.p`
+  color: #d1d1d1;
+  line-height: 1.6;
+  text-align: left;
+`;
+const SDetail = styled.section`
+  margin-top: 24px;
+  h2 {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
 `;
 
 const SLinks = styled.div`
@@ -46,24 +77,25 @@ const Project: FC = () => {
   const project = projects.find(({ slug: s2 }) => s1 === s2);
   if (!project) return <Empty />;
 
-  const { category, title, text, images, links } = project;
-
-  const texts = text[lang]
-    .split("\n")
-    .map((x) => <Section.Text key={x}>{x}</Section.Text>);
+  const { title, text, images, links } = project;
 
   return (
     <SProject>
-      <Section>
-        <Section.Category>{category[lang]}</Section.Category>
-        <Section.Title>{title[lang]}</Section.Title>
-        {texts}
-      </Section>
-      <Slider>
-        {images.map((src) => (
-          <Slider.Slide key={src} src={src} alt={title[lang]} />
-        ))}
-      </Slider>
+      <SIntro aria-labelledby="project-title">
+        <STitle id="project-title">{title[lang]}</STitle>
+        <SText>{text.summary[lang]}</SText>
+        <SDetail aria-labelledby="contribution-title">
+          <h2 id="contribution-title">
+            {lang === "sv" ? "Mitt bidrag" : "My contribution"}
+          </h2>
+          <SText>{text.contribution[lang]}</SText>
+        </SDetail>
+        <SDetail aria-labelledby="outcome-title">
+          <h2 id="outcome-title">{lang === "sv" ? "Resultat" : "Outcome"}</h2>
+          <SText>{text.outcome[lang]}</SText>
+        </SDetail>
+      </SIntro>
+      <Slider key={project.slug} images={images} title={title[lang]} />
       <SLinks ref={ref} active={visible}>
         {links.map(({ url, label }) => (
           <SExternal key={url} to={url}>

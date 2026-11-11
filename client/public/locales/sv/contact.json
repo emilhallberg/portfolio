@@ -1,11 +1,11 @@
 {
   "title": "Har du en idé? Låt oss komma i kontakt.",
-  "text": "Jag är öppen för förslag eller bara diskussioner. Fyll i formuläret nedan så hör jag av mig så fort jag kan.",
+  "text": "Har du ett projekt i åtanke eller något du vill diskutera? Skicka ett meddelande så hör jag av mig.",
   "name": "Namn",
   "email": "Email",
   "subject": "Ämne",
   "message": "Meddelande",
-  "send": "Skicka",
+  "send": "Skicka meddelande",
   "thanks": {
     "title": "Tack för ditt meddelande!",
     "text": "Jag hör av mig så fort som möjligt.",
