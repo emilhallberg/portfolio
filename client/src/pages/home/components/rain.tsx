@@ -42,6 +42,7 @@ const Rain = () => {
     let height = 0;
     let frame = 0;
     let previousTime = 0;
+    let isPhone = false;
     let drops: Drop[] = [];
     const splashes: Splash[] = [];
     // Read actual card edges so collisions follow responsive layout and scrolling.
@@ -59,13 +60,12 @@ const Rain = () => {
     const resize = () => {
       width = window.innerWidth;
       height = window.innerHeight;
+      isPhone = window.matchMedia(`(max-width: ${media.phone})`).matches;
       const ratio = Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(width * ratio);
       canvas.height = Math.round(height * ratio);
       context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      drops = Array.from({ length: width < 769 ? 50 : 100 }, () =>
-        makeDrop(true),
-      );
+      drops = Array.from({ length: isPhone ? 34 : 100 }, () => makeDrop(true));
       splashes.length = 0;
     };
 
@@ -77,7 +77,7 @@ const Rain = () => {
       previousTime = time;
       context.clearRect(0, 0, width, height);
       const surfaces = cards
-        .slice(0, window.matchMedia(`(max-width: ${media.phone})`).matches ? 1 : 2)
+        .slice(0, 2)
         .filter((card) => getComputedStyle(card).opacity !== "0")
         .map((card) => card.getBoundingClientRect())
         .filter((rect) => rect.bottom > 0 && rect.top < height);
@@ -104,11 +104,12 @@ const Rain = () => {
         }
 
         if (hit) {
-          for (let particle = 0; particle < 5; particle++) {
+          const count = isPhone ? 3 : 5;
+          for (let particle = 0; particle < count; particle++) {
             splashes.push({
               ...hit,
-              vx: (particle - 2) * (25 + Math.random() * 20),
-              vy: -65 - Math.random() * 90,
+              vx: (particle - (count - 1) / 2) * (25 + Math.random() * 20),
+              vy: isPhone ? -45 - Math.random() * 45 : -65 - Math.random() * 90,
               age: 0,
             });
           }
@@ -147,10 +148,18 @@ const Rain = () => {
           continue;
         }
         context.fillStyle = `rgba(235, 244, 250, ${
-          0.75 * (1 - splash.age / 0.42)
+          (isPhone ? 0.5 : 0.75) * (1 - splash.age / 0.42)
         })`;
         context.beginPath();
-        context.ellipse(splash.x, splash.y, 1.2, 1.8, 0, 0, Math.PI * 2);
+        context.ellipse(
+          splash.x,
+          splash.y,
+          isPhone ? 0.8 : 1.2,
+          isPhone ? 1.2 : 1.8,
+          0,
+          0,
+          Math.PI * 2,
+        );
         context.fill();
       }
       frame = requestAnimationFrame(draw);

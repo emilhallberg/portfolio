@@ -33,9 +33,9 @@ const SGreeting = styled.div<SActiveProps>`
   height: calc(100vh - ${d.header});
 
   @media (max-width: ${media.phone}) {
-    /* Reserve a visible preview of the first project, even with Safari's bars open. */
-    height: calc(100vh - ${d.header} - 120px);
-    height: calc(100svh - ${d.header} - 120px);
+    /* Show recognizable project previews with Safari's browser bars open. */
+    height: calc(100vh - ${d.header} - 168px);
+    height: calc(100svh - ${d.header} - 168px);
     min-height: 360px;
     grid-template-rows: 1fr max-content 14px max-content 28px max-content 48px;
   }

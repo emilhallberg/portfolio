@@ -25,10 +25,23 @@ const SProject = styled.div<AnimationProps>`
     ${slideUp};
   }
   @media (max-width: ${media.phone}) {
+    grid-column: span 2;
     &:nth-child(3n + 1) {
       grid-row: auto / span 12;
     }
-    &:nth-child(n + 2) {
+    &:nth-child(-n + 2) {
+      grid-column: span 1;
+      grid-row: auto / span 8;
+      > a {
+        grid-template-columns: 10px minmax(0, 1fr) 10px;
+        grid-template-rows: minmax(0, 1fr) 56px;
+      }
+      h4 {
+        font-size: 13px;
+        line-height: 1.3;
+      }
+    }
+    &:nth-child(n + 3) {
       ${slideUp};
     }
   }

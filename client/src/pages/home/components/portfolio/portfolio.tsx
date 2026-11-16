@@ -7,11 +7,13 @@ import useLanguage from "../../../../hooks/useLanguage";
 import media from "../../../../resources/stylesheets/media";
 import { phone } from "../../../../resources/stylesheets/dimensions";
 import { portfolio } from "../../../../routes/paths";
+import Colors from "../../../../resources/stylesheets/colors";
 
 const SSection = styled(Section)`
   padding-bottom: 0;
   @media (max-width: ${media.phone}) {
     padding: 0 ${phone.padding};
+    background: linear-gradient(transparent, ${Colors.background} 260px);
   }
 `;
 
@@ -29,7 +31,8 @@ const SProjects = styled.div`
     transform: none;
     width: 100%;
     min-width: 0;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-gap: 12px;
     padding: 0 0 32px;
   }
 `;
