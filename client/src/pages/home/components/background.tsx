@@ -12,16 +12,17 @@ const SBackground = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  background-image: url('/images/emil-japan-mobile.jpg');
   opacity: 0.5;
   z-index: -1;
+
+  @media (min-width: 769px), (min-resolution: 1.5dppx) {
+    background-image: url('/images/emil-japan-desktop.jpg');
+  }
 `;
 
 const Background: FC = () => {
-  return (
-    <SBackground
-      style={{ backgroundImage: "url('/images/emil-japan.jpeg')" }}
-    />
-  );
+  return <SBackground aria-hidden="true" />;
 };
 
 export default Background;
