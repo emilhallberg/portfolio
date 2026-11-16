@@ -10,6 +10,9 @@ import { portfolio } from "../../../../routes/paths";
 
 const SSection = styled(Section)`
   padding-bottom: 0;
+  @media (max-width: ${media.phone}) {
+    padding: 0 ${phone.padding};
+  }
 `;
 
 const SProjects = styled.div`
@@ -23,8 +26,11 @@ const SProjects = styled.div`
   justify-self: center;
   padding-bottom: 32px;
   @media (max-width: ${media.phone}) {
+    transform: none;
+    width: 100%;
+    min-width: 0;
     grid-template-columns: 1fr;
-    padding: ${phone.padding};
+    padding: 0 0 32px;
   }
 `;
 

@@ -8,6 +8,7 @@ import { d } from "../../../resources/stylesheets/dimensions";
 import Colors from "../../../resources/stylesheets/colors";
 import { fadeIn } from "../../../resources/animations/animations";
 import { contact } from "../../../routes/paths";
+import media from "../../../resources/stylesheets/media";
 
 interface SActiveProps {
   active: boolean;
@@ -30,6 +31,14 @@ const SGreeting = styled.div<SActiveProps>`
     active ? Colors.background : "transparent"};
   transition: background-color 250ms ease-out;
   height: calc(100vh - ${d.header});
+
+  @media (max-width: ${media.phone}) {
+    /* Reserve a visible preview of the first project, even with Safari's bars open. */
+    height: calc(100vh - ${d.header} - 120px);
+    height: calc(100svh - ${d.header} - 120px);
+    min-height: 360px;
+    grid-template-rows: 1fr max-content 14px max-content 28px max-content 48px;
+  }
 `;
 
 const STitle = styled.h1`
