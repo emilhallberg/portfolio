@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
+import Rain from "./rain";
 
 const SBackground = styled.div`
   position: fixed;
@@ -9,20 +10,32 @@ const SBackground = styled.div`
   height: 103vh;
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-image: url('/images/emil-japan-mobile.jpg');
-  opacity: 0.5;
+  pointer-events: none;
   z-index: -1;
 
-  @media (min-width: 769px), (min-resolution: 1.5dppx) {
-    background-image: url('/images/emil-japan-desktop.jpg');
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("/images/emil-japan-mobile.jpg");
+    opacity: 0.5;
+
+    @media (min-width: 769px), (min-resolution: 1.5dppx) {
+      background-image: url("/images/emil-japan-desktop.jpg");
+    }
   }
 `;
 
 const Background: FC = () => {
-  return <SBackground aria-hidden="true" />;
+  return (
+    <>
+      <SBackground aria-hidden="true" />
+      <Rain />
+    </>
+  );
 };
 
 export default Background;

@@ -70,7 +70,7 @@ interface ProjectProps {
 const Project: ProjectComp<ProjectProps> = ({ to, children }: ProjectProps) => {
   const { ref, visible } = useWhenInView(100);
   return (
-    <SProject ref={ref} active={visible}>
+    <SProject ref={ref} active={visible} data-rain-surface>
       <SLink to={to}>{children}</SLink>
     </SProject>
   );
